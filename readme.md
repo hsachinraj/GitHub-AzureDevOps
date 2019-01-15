@@ -149,12 +149,12 @@ Task 1 -- Installing Azure Pipelines
 
 2.  Navigate to the **GitHub Marketplace**.
 
-    ![](.\images/media/image1.png){width="5.749281496062992in"
+    ![](./images/image1.png){width="5.749281496062992in"
     height="0.49993766404199474in"}
 
 3.  Search for **"pipelines"** and click **Azure Pipelines**.
 
-    ![](.\images/media/image2.png){width="5.634712379702537in"
+    ![](./images/image2.png){width="5.634712379702537in"
     height="1.3956583552055992in"}
 
     \> **Talk track:** Azure Pipelines is free to use for both public
@@ -165,30 +165,30 @@ Task 1 -- Installing Azure Pipelines
 
 4.  Scroll to the bottom and click **Install it for free**.
 
-    ![](.\images/media/image3.png){width="6.0375in"
+    ![](./images/image3.png){width="6.0375in"
     height="3.214583333333333in"}
 
 5.  If you have multiple **GitHub** accounts, select the one you forked
     the project to from the **Switch billing account** dropdown.
 
-    ![](.\images/media/image4.png){width="5.051452318460193in"
+    ![](./images/image4.png){width="5.051452318460193in"
     height="2.8850557742782152in"}
 
 6.  Click **Complete order and begin installation**.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML329dc28.PNG](.\images/media/image5.png){width="4.886805555555555in"
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML329dc28.PNG](./images/image5.png){width="4.886805555555555in"
     height="0.8666666666666667in"}
 
     Note that if you previously installed Azure Pipelines, you may need
     to click **grant this app access** instead.
 
-    ![](.\images/media/image6.png){width="4.916052055993001in"
+    ![](./images/image6.png){width="4.916052055993001in"
     height="0.8332294400699912in"}
 
 7.  Select the repositories you want to include (or **All
     repositories**) and click **Install**.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML349c700b.PNG](.\images/media/image7.png){width="4.875in"
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML349c700b.PNG](./images/image7.png){width="4.875in"
     height="4.447916666666667in"}
 
 Task 2 -- Configuring an Azure Continuous Integration Pipeline
@@ -203,12 +203,12 @@ thing we'll do is to create the build pipeline.
 1.  Select the organization and Azure DevOps project created ahead of
     time.
 
-    ![](.\images/media/image8.png){width="3.8745155293088365in"
+    ![](./images/image8.png){width="3.8745155293088365in"
     height="4.218222878390201in"}
 
 2.  Select the forked repo.
 
-    ![](.\images/media/image9.png){width="5.145190288713911in"
+    ![](./images/image9.png){width="5.145190288713911in"
     height="1.7914424759405074in"}
 
     \> **Talk track:** Every build pipeline is simply a set of tasks.
@@ -223,7 +223,7 @@ thing we'll do is to create the build pipeline.
 
 3.  Select the recommended template.
 
-    ![](.\images/media/image10.png){width="3.6662084426946633in"
+    ![](./images/image10.png){width="3.6662084426946633in"
     height="1.7393657042869641in"}
 
 4.  Replace the default template with the YAML below.
@@ -281,13 +281,13 @@ thing we'll do is to create the build pipeline.
 
 5.  Click **Save and run**.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTMLe600c49.PNG](.\images/media/image11.png){width="2.3229166666666665in"
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTMLe600c49.PNG](./images/image11.png){width="2.3229166666666665in"
     height="0.5625in"}
 
 6.  Confirm the **Save and run** to commit the YAML definition directly
     to the master branch of the repo.
 
-    ![](.\images/media/image12.png){width="4.020330271216098in"
+    ![](./images/image12.png){width="4.020330271216098in"
     height="3.54122375328084in"}
 
 7.  Follow the build through to completion.
@@ -304,12 +304,12 @@ experience is, we will build this pipeline from an empty template.
 
 1.  Click **Release**.
 
-    ![](.\images/media/image13.png){width="4.572344706911636in"
+    ![](./images/image13.png){width="4.572344706911636in"
     height="0.7603215223097113in"}
 
 2.  Click **Empty job**.
 
-    ![](.\images/media/image14.png){width="2.239303368328959in"
+    ![](./images/image14.png){width="2.239303368328959in"
     height="0.6457524059492563in"}
 
     \> **Talk track:** The first item to define in a release pipeline is
@@ -320,14 +320,14 @@ experience is, we will build this pipeline from an empty template.
 
 3.  Click **Add an artifact**.
 
-    ![](.\images/media/image15.png){width="1.7081200787401576in"
+    ![](./images/image15.png){width="1.7081200787401576in"
     height="2.0309962817147857in"}
 
 4.  Set **Source** to the build pipeline created earlier and **Default
     version** to **Latest**. Change the **Source alias** to
     **"\_ContosoAir-CI"** and click **Add**.
 
-    ![](.\images/media/image16.png){width="2.8538101487314087in"
+    ![](./images/image16.png){width="2.8538101487314087in"
     height="3.6662084426946633in"}
 
     \> **Talk track:** As we did with continuous integration starting on
@@ -336,12 +336,12 @@ experience is, we will build this pipeline from an empty template.
 
 5.  Click the **Triggers** button on the artifact.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML38b9ea3a.PNG](.\images/media/image17.png){width="1.8125in"
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML38b9ea3a.PNG](./images/image17.png){width="1.8125in"
     height="1.2395833333333333in"}
 
 6.  **Enable** continuous integration.
 
-    ![](.\images/media/image18.png){width="3.176686351706037in"
+    ![](./images/image18.png){width="3.176686351706037in"
     height="1.2185979877515312in"}
 
     \> **Talk track:** We also have the option of adding quality gates
@@ -355,12 +355,12 @@ experience is, we will build this pipeline from an empty template.
 
 7.  Click the **pre-deployment conditions** button.
 
-    ![](.\images/media/image19.png){width="2.6246719160104988in"
+    ![](./images/image19.png){width="2.6246719160104988in"
     height="1.072782152230971in"}
 
 8.  Review pre-deployment condition options.
 
-    ![](.\images/media/image20.png){width="3.3537478127734035in"
+    ![](./images/image20.png){width="3.3537478127734035in"
     height="1.3227515310586178in"}
 
     \> **Talk track:** In this pipeline, we're going to need to specify
@@ -372,14 +372,14 @@ experience is, we will build this pipeline from an empty template.
 
 9.  Select the **Variables** tab.
 
-    ![](.\images/media/image21.png){width="4.676498250218723in"
+    ![](./images/image21.png){width="4.676498250218723in"
     height="1.3852438757655292in"}
 
 10. **Add** a **resourcegroup** variable that is not currently used by
     an existing resource group in your Azure account (**"contosoair"**
     will be used in this script).
 
-    ![](.\images/media/image22.png){width="3.22876312335958in"
+    ![](./images/image22.png){width="3.22876312335958in"
     height="1.7601968503937009in"}
 
     \> **Talk track:** Also, just like the build pipeline, the release
@@ -393,34 +393,34 @@ experience is, we will build this pipeline from an empty template.
 
 11. Select the **Tasks** tab.
 
-    ![](.\images/media/image23.png){width="4.811898512685914in"
+    ![](./images/image23.png){width="4.811898512685914in"
     height="0.9061362642169729in"}
 
 12. Click the **Add task** button.
 
-    ![](.\images/media/image24.png){width="2.0726574803149607in"
+    ![](./images/image24.png){width="2.0726574803149607in"
     height="0.708244750656168in"}
 
 13. Search for **"resource"** and **Add** an **Azure Resource Group
     Deployment** task.
 
-    ![](.\images/media/image25.png){width="4.957713254593176in"
+    ![](./images/image25.png){width="4.957713254593176in"
     height="2.5725951443569555in"}
 
 14. Select the newly created task.
 
-    ![](.\images/media/image26.png){width="4.030745844269466in"
+    ![](./images/image26.png){width="4.030745844269466in"
     height="1.3123359580052494in"}
 
 15. Select and authorize an Azure subscription.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML393f8328.PNG](.\images/media/image27.png){width="4.666666666666667in"
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML393f8328.PNG](./images/image27.png){width="4.666666666666667in"
     height="0.6666666666666666in"}
 
 16. Set the **Resource group** to **"\$(resourcegroup)"** and select a
     **Location**.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML42d91670.PNG](.\images/media/image28.png){width="3.0in"
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML42d91670.PNG](./images/image28.png){width="3.0in"
     height="1.5in"}
 
     \> **Talk track:** Rather than having to manually create the Azure
@@ -447,7 +447,7 @@ experience is, we will build this pipeline from an empty template.
     part of the app service name in Azure, so please limit it to
     supported characters.
 
-    ![](.\images/media/image29.png){width="4.103653762029746in"
+    ![](./images/image29.png){width="4.103653762029746in"
     height="2.8017333770778654in"}
 
     \> **Talk track:** When this task completes, it will have generated
@@ -464,23 +464,23 @@ experience is, we will build this pipeline from an empty template.
 
 18. Click the **Add task** button.
 
-    ![](.\images/media/image24.png){width="2.0726574803149607in"
+    ![](./images/image24.png){width="2.0726574803149607in"
     height="0.708244750656168in"}
 
 19. Search for **"arm"** and select **Learn more \| More information**.
     This will open the GitHub project for this extension in a new tab.
 
-    ![](.\images/media/image30.png){width="5.415989720034996in"
+    ![](./images/image30.png){width="5.415989720034996in"
     height="1.645627734033246in"}
 
 20. Click the link to the Visual Studio Marketplace.
 
-    ![](.\images/media/image31.png){width="4.905636482939633in"
+    ![](./images/image31.png){width="4.905636482939633in"
     height="1.4998129921259842in"}
 
 21. Close the new tab.
 
-    ![](.\images/media/image32.png){width="3.7182852143482066in"
+    ![](./images/image32.png){width="3.7182852143482066in"
     height="2.8225634295713036in"}
 
     \> **Talk track:** Now let's get back to adding the ARM Outputs
@@ -491,18 +491,18 @@ experience is, we will build this pipeline from an empty template.
 
 22. **Add** an **ARM Outputs** task.
 
-    ![](.\images/media/image33.png){width="4.3536220472440945in"
+    ![](./images/image33.png){width="4.3536220472440945in"
     height="1.8122736220472442in"}
 
 23. Select the newly created task.
 
-    ![](.\images/media/image34.png){width="4.114069335083115in"
+    ![](./images/image34.png){width="4.114069335083115in"
     height="1.3539971566054243in"}
 
 24. Select the same subscription from the previous task and enter the
     same resource group variable name.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML42ecfcec.PNG](.\images/media/image35.png){width="3.75in"
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML42ecfcec.PNG](./images/image35.png){width="3.75in"
     height="1.3645833333333333in"}
 
     \> **Talk track:** Finally, we can deploy the app service. We'll use
@@ -514,33 +514,33 @@ experience is, we will build this pipeline from an empty template.
 
 25. Click the **Add task** button.
 
-    ![](.\images/media/image24.png){width="2.0726574803149607in"
+    ![](./images/image24.png){width="2.0726574803149607in"
     height="0.708244750656168in"}
 
 26. Search for **"app service"** and **Add** an **Azure App Service
     Deploy** task.
 
-    ![](.\images/media/image36.png){width="4.3536220472440945in"
+    ![](./images/image36.png){width="4.3536220472440945in"
     height="3.176686351706037in"}
 
 27. Select the newly created task.
 
-    ![](.\images/media/image37.png){width="4.093238188976378in"
+    ![](./images/image37.png){width="4.093238188976378in"
     height="2.405949256342957in"}
 
 28. Select the same subscription as earlier.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML38dcffeb.PNG](.\images/media/image38.png){width="4.354166666666667in"
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML38dcffeb.PNG](./images/image38.png){width="4.354166666666667in"
     height="0.7708333333333334in"}
 
 29. Enter the **App Service name** of **"\$(web)"**.
 
-    ![](.\images/media/image39.png){width="2.7392410323709537in"
+    ![](./images/image39.png){width="2.7392410323709537in"
     height="0.9894597550306212in"}
 
 30. **Save** the pipeline.
 
-    ![](.\images/media/image40.png){width="3.582884951881015in"
+    ![](./images/image40.png){width="3.582884951881015in"
     height="0.4686909448818898in"}
 
 Task 4 -- Invoking Continuous Delivery from GitHub to Azure
@@ -556,12 +556,12 @@ creation and commit a slight edit to trigger the CI/CD process.
 2.  From the **Source Control** tab, select **Sync** from the **More
     Actions** dropdown.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML1364534f.PNG](.\images/media/image41.png){width="4.958333333333333in"
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML1364534f.PNG](./images/image41.png){width="4.958333333333333in"
     height="2.5in"}
 
 3.  From the **Explorer** tab, open **azure-pipelines.yml**.
 
-    ![](.\images/media/image42.png){width="2.1768110236220473in"
+    ![](./images/image42.png){width="2.1768110236220473in"
     height="3.1558552055993in"}
 
     \> **Talk track:** Before we make our change, let's take a quick
@@ -594,13 +594,13 @@ creation and commit a slight edit to trigger the CI/CD process.
     **"Updated build pipeline"** and press **Ctrl+Enter** to commit.
     Confirm if prompted.
 
-    ![](.\images/media/image43.png){width="3.6453772965879265in"
+    ![](./images/image43.png){width="3.6453772965879265in"
     height="1.6352121609798775in"}
 
 10. Press the **Synchronize Changes** button at the bottom of the window
     to push the commit to the server. Confirm if prompted.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML136c0f0b.PNG](.\images/media/image44.png){width="1.9375in"
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML136c0f0b.PNG](./images/image44.png){width="1.9375in"
     height="0.71875in"}
 
     \> **Talk track:** Back in Azure DevOps, we can see that our build
@@ -612,22 +612,22 @@ creation and commit a slight edit to trigger the CI/CD process.
 
 11. Return to Azure DevOps and navigate to the **Builds** hub.
 
-    ![](.\images/media/image45.png){width="1.6039665354330708in"
+    ![](./images/image45.png){width="1.6039665354330708in"
     height="1.3644127296587927in"}
 
 12. Click the new build.
 
-    ![](.\images/media/image46.png){width="2.520518372703412in"
+    ![](./images/image46.png){width="2.520518372703412in"
     height="1.5102274715660542in"}
 
 13. Track the build tasks.
 
-    ![](.\images/media/image47.png){width="6.5in"
+    ![](./images/image47.png){width="6.5in"
     height="3.2263888888888888in"}
 
 14. Follow the build through to completion.
 
-    ![](.\images/media/image48.png){width="5.895096237970254in"
+    ![](./images/image48.png){width="5.895096237970254in"
     height="1.7497812773403325in"}
 
     \> **Talk track:** Now that the build has completed, let's check out
@@ -639,18 +639,18 @@ creation and commit a slight edit to trigger the CI/CD process.
 
 15. Navigate to the **Releases** hub.
 
-    ![](.\images/media/image49.png){width="1.6039665354330708in"
+    ![](./images/image49.png){width="1.6039665354330708in"
     height="1.3644127296587927in"}
 
 16. Select the new release. If one is not immediately available, click
     the **Refresh** option.
 
-    ![](.\images/media/image50.png){width="5.332666229221347in"
+    ![](./images/image50.png){width="5.332666229221347in"
     height="1.4685662729658793in"}
 
 17. Click **In progress** to follow the release process.
 
-    ![](.\images/media/image51.png){width="2.312211286089239in"
+    ![](./images/image51.png){width="2.312211286089239in"
     height="2.041411854768154in"}
 
 18. Note that it will take a few minutes (around 5 at the time of
@@ -658,7 +658,7 @@ creation and commit a slight edit to trigger the CI/CD process.
     operations. Move ahead to the next step while it works in the
     backgroud.
 
-    ![](.\images/media/image52.png){width="6.5in"
+    ![](./images/image52.png){width="6.5in"
     height="3.245138888888889in"}
 
 Task 5 -- Reviewing the ARM template
@@ -672,7 +672,7 @@ understand how it's structured.
 
 2.  From the **Explorer** tab, open **/deployment/azuredeploy.json**.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML13deea1f.PNG](.\images/media/image53.png){width="3.1979166666666665in"
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML13deea1f.PNG](./images/image53.png){width="3.1979166666666665in"
     height="2.0625in"}
 
     \> **Talk track:** The first section defines the parameters the
@@ -683,7 +683,7 @@ understand how it's structured.
 
 3.  Review **parameters**.
 
-    ![](.\images/media/image54.png){width="3.5620548993875767in"
+    ![](./images/image54.png){width="3.5620548993875767in"
     height="2.3434569116360455in"}
 
     \> **Talk track:** The variables section defines a set of template
@@ -699,7 +699,7 @@ understand how it's structured.
 
 4.  Review **variables**.
 
-    ![](.\images/media/image55.png){width="5.551388888888889in"
+    ![](./images/image55.png){width="5.551388888888889in"
     height="0.8332294400699912in"}
 
     \> **Talk track:** The resources section defines the actual
@@ -711,7 +711,7 @@ understand how it's structured.
 
 5.  Review **resources**.
 
-    ![](.\images/media/image56.png){width="5.332666229221347in"
+    ![](./images/image56.png){width="5.332666229221347in"
     height="1.9372583114610673in"}
 
     \> **Talk track:** The outputs section provides a way to expose data
@@ -721,7 +721,7 @@ understand how it's structured.
 
 6.  Review **outputs**.
 
-    ![](.\images/media/image57.png){width="5.0618667979002625in"
+    ![](./images/image57.png){width="5.0618667979002625in"
     height="1.2081824146981628in"}
 
 Task 6 -- Reviewing the Application and Azure Portal
@@ -741,7 +741,7 @@ the solution our release pipeline created earlier.
 
 3.  Search for your resource group name and open it.
 
-    ![](.\images/media/image58.png){width="2.239303368328959in"
+    ![](./images/image58.png){width="2.239303368328959in"
     height="1.2915048118985126in"}
 
     \> **Talk track:** Our solution requires three resources in Azure.
@@ -758,7 +758,7 @@ the solution our release pipeline created earlier.
     so the actual site itself won't be ready until the pipeline
     completes.
 
-    ![](.\images/media/image59.png){width="4.093238188976378in"
+    ![](./images/image59.png){width="4.093238188976378in"
     height="1.4269050743657044in"}
 
     \> **Talk track:** This view is the dashboard for the app service
@@ -771,12 +771,12 @@ the solution our release pipeline created earlier.
 
 5.  Click **Diagnose and solve problems**.
 
-    ![](.\images/media/image60.png){width="2.405949256342957in"
+    ![](./images/image60.png){width="2.405949256342957in"
     height="1.6664588801399824in"}
 
 6.  Review the options.
 
-    ![](.\images/media/image61.png){width="6.0375in"
+    ![](./images/image61.png){width="6.0375in"
     height="3.6486111111111112in"}
 
     \> **Talk track:** The deployment center provides a single place to
@@ -790,12 +790,12 @@ the solution our release pipeline created earlier.
 
 7.  Click **Deployment Center**.
 
-    ![](.\images/media/image62.png){width="2.426780402449694in"
+    ![](./images/image62.png){width="2.426780402449694in"
     height="1.6977045056867892in"}
 
 8.  Review the deployment.
 
-    ![](.\images/media/image63.png){width="4.322376421697288in"
+    ![](./images/image63.png){width="4.322376421697288in"
     height="1.1665212160979876in"}
 
     \> **Talk track:** The "application settings" view enables you to
@@ -806,7 +806,7 @@ the solution our release pipeline created earlier.
 
 9.  Click **Application settings**.
 
-    ![](.\images/media/image64.png){width="2.4784722222222224in"
+    ![](./images/image64.png){width="2.4784722222222224in"
     height="1.2291666666666667in"}
 
     \> **Talk track:** Application Insights is one of the most valuable
@@ -821,7 +821,7 @@ the solution our release pipeline created earlier.
 
 10. Click **Application Insights**.
 
-    ![](.\images/media/image65.png){width="2.4371948818897637in"
+    ![](./images/image65.png){width="2.4371948818897637in"
     height="1.9476727909011373in"}
 
     \> **Talk track:** One of the great benefits of a cloud platform is
@@ -834,12 +834,12 @@ the solution our release pipeline created earlier.
 
 11. Click **Scale up**.
 
-    ![](.\images/media/image66.png){width="2.510102799650044in"
+    ![](./images/image66.png){width="2.510102799650044in"
     height="1.3644127296587927in"}
 
 12. Review options.
 
-    ![](.\images/media/image67.png){width="8.13263888888889in"
+    ![](./images/image67.png){width="8.13263888888889in"
     height="6.5in"}
 
     \> **Talk track:** In addition to web sites, you can also build and
@@ -850,7 +850,7 @@ the solution our release pipeline created earlier.
 
 13. Click **WebJobs**.
 
-    ![](.\images/media/image68.png){width="2.520518372703412in"
+    ![](./images/image68.png){width="2.520518372703412in"
     height="2.760071084864392in"}
 
     \> **Talk track:** There's also a console option for you to explore
@@ -859,12 +859,12 @@ the solution our release pipeline created earlier.
 
 14. Click **Console**.
 
-    ![](.\images/media/image69.png){width="2.3226268591426074in"
+    ![](./images/image69.png){width="2.3226268591426074in"
     height="3.0308716097987753in"}
 
 15. Execute a **"dir"** command.
 
-    ![](.\images/media/image70.png){width="4.1765616797900265in"
+    ![](./images/image70.png){width="4.1765616797900265in"
     height="4.051576990376203in"}
 
     \> **Talk track:** There are also plenty of built in monitoring and
@@ -876,17 +876,17 @@ the solution our release pipeline created earlier.
 
 16. Review monitoring options.
 
-    ![](.\images/media/image71.png){width="1.9476727909011373in"
+    ![](./images/image71.png){width="1.9476727909011373in"
     height="1.7601968503937009in"}
 
 17. Click **App Service Advisor**.
 
-    ![](.\images/media/image72.png){width="1.926842738407699in"
+    ![](./images/image72.png){width="1.926842738407699in"
     height="1.3956583552055992in"}
 
 18. Review insights.
 
-    ![](.\images/media/image73.png){width="5.655543525809274in"
+    ![](./images/image73.png){width="5.655543525809274in"
     height="2.0205807086614174in"}
 
     \> **Talk track:** That was a quick tour of the app service
@@ -896,12 +896,12 @@ the solution our release pipeline created earlier.
 
 19. Click the **URL** to open the site.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML39096e7d.PNG](.\images/media/image74.png){width="3.0833333333333335in"
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML39096e7d.PNG](./images/image74.png){width="3.0833333333333335in"
     height="0.5208333333333334in"}
 
 20. Review the site. Keep the browser window open for later.
 
-    ![](.\images/media/image75.png){width="4.551514654418198in"
+    ![](./images/image75.png){width="4.551514654418198in"
     height="2.447610454943132in"}
 
 Task 7 -- Managing GitHub Projects with Azure DevOps
@@ -919,7 +919,7 @@ track your work.
 
 2.  Navigate to **Boards \| Backlogs**.
 
-    ![](.\images/media/image76.png){width="1.489397419072616in"
+    ![](./images/image76.png){width="1.489397419072616in"
     height="1.885181539807524in"}
 
     \> **Talk track:** In our scenario, users will need to be able to
@@ -933,7 +933,7 @@ track your work.
 3.  Click **New Work Item** and add a user story with the title **"User
     can select airport by city"**. Press **Enter** to create.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML9701286.PNG](.\images/media/image77.png){width="5.364583333333333in"
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML9701286.PNG](./images/image77.png){width="5.364583333333333in"
     height="1.0625in"}
 
     \> **Talk track:** In addition to working with work items in a
@@ -944,19 +944,19 @@ track your work.
 
 4.  Click **View as board**.
 
-    ![](.\images/media/image78.png){width="4.530683508311461in"
+    ![](./images/image78.png){width="4.530683508311461in"
     height="0.9269674103237096in"}
 
 5.  Drag the newly created user story to the **Active** column.
 
-    ![](.\images/media/image79.png){width="4.624421478565179in"
+    ![](./images/image79.png){width="4.624421478565179in"
     height="1.885181539807524in"}
 
 6.  Dropping the user story onto the **Active** column assigns it to you
     and sets its **State** to **Active**. Make note of the task ID for
     reference later during a future commit and pull request.
 
-    ![](.\images/media/image80.png){width="2.333041338582677in"
+    ![](./images/image80.png){width="2.333041338582677in"
     height="1.781026902887139in"}
 
 \> **Talk track:** In order to complete our integration, we'll need to
@@ -964,22 +964,22 @@ wire up a connection between this project and the GitHub repo.
 
 7.  Click **Project settings**.
 
-    ![](.\images/media/image81.png){width="2.7809022309711287in"
+    ![](./images/image81.png){width="2.7809022309711287in"
     height="0.5624300087489064in"}
 
 8.  Under **Boards**, select **GitHub connections**.
 
-    ![](.\images/media/image82.png){width="1.8122736220472442in"
+    ![](./images/image82.png){width="1.8122736220472442in"
     height="1.5623042432195975in"}
 
 9.  Click **Connect your GitHub account**.
 
-    ![](.\images/media/image83.png){width="4.811898512685914in"
+    ![](./images/image83.png){width="4.811898512685914in"
     height="1.8226891951006123in"}
 
 10. Select the project repo and click **Save**.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML2712de8e.PNG](.\images/media/image84.png){width="4.28125in"
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML2712de8e.PNG](./images/image84.png){width="4.28125in"
     height="1.4375in"}
 
     \> **Talk track:** Let's take a look at our deployed site to see
@@ -989,23 +989,23 @@ wire up a connection between this project and the GitHub repo.
 
 11. Return to the web app tab and click **Login**.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTMLe8868fc.PNG](.\images/media/image85.png){width="1.7083333333333333in"
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTMLe8868fc.PNG](./images/image85.png){width="1.7083333333333333in"
     height="0.3541666666666667in"}
 
 12. Log in with any email and password.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTMLe88013a.PNG](.\images/media/image86.png){width="4.572916666666667in"
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTMLe88013a.PNG](./images/image86.png){width="4.572916666666667in"
     height="2.8958333333333335in"}
 
 13. Click **Book**.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTMLe876e60.PNG](.\images/media/image87.png){width="1.6979166666666667in"
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTMLe876e60.PNG](./images/image87.png){width="1.6979166666666667in"
     height="0.3541666666666667in"}
 
 14. Expand the airport dropdown to note that it's not sorted
     alphabetically by city.
 
-    ![](.\images/media/image88.png){width="4.738990594925634in"
+    ![](./images/image88.png){width="4.738990594925634in"
     height="4.457775590551181in"}
 
 Task 8 -- Committing to Complete a Task
@@ -1020,24 +1020,24 @@ Task 8 -- Committing to Complete a Task
 
 2.  Click the **master** branch at the bottom of the window.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML137df3cb.PNG](.\images/media/image89.png){width="1.6145833333333333in"
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML137df3cb.PNG](./images/image89.png){width="1.6145833333333333in"
     height="0.4895833333333333in"}
 
 3.  From the top of the screen, click **Create new branch**.
 
-    ![](.\images/media/image90.png){width="1.9789195100612424in"
+    ![](./images/image90.png){width="1.9789195100612424in"
     height="0.9477985564304462in"}
 
 4.  Enter the name **"airport-sorting"** and press **Enter**. This will
     activate the new branch.
 
-    ![](.\images/media/image91.png){width="4.738990594925634in"
+    ![](./images/image91.png){width="4.738990594925634in"
     height="0.708244750656168in"}
 
 5.  From the **Explorer** tab, open
     **src/services/book.form.service.js**.
 
-    ![](.\images/media/image92.png){width="3.6870395888014in"
+    ![](./images/image92.png){width="3.6870395888014in"
     height="3.6245472440944884in"}
 
 6.  Locate the **getForm** function and replace the existing
@@ -1048,7 +1048,7 @@ Task 8 -- Committing to Complete a Task
 
     return first.city.localeCompare(second.city);})
 
-    ![](.\images/media/image93.png){width="6.5in"
+    ![](./images/image93.png){width="6.5in"
     height="1.0541666666666667in"}
 
 7.  Press **Ctrl+S** to save the file.
@@ -1064,12 +1064,12 @@ Task 8 -- Committing to Complete a Task
     with the actual ID of the Azure Boards task. Press **Ctrl+Enter**
     and confirm the commit if prompted.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML97d87a7.PNG](.\images/media/image94.png){width="3.875in"
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML97d87a7.PNG](./images/image94.png){width="3.875in"
     height="1.28125in"}
 
 9.  Click the **Publish Changes** button at the bottom of the screen.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML13836058.PNG](.\images/media/image95.png){width="2.0104166666666665in"
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML13836058.PNG](./images/image95.png){width="2.0104166666666665in"
     height="0.4375in"}
 
 10. When the push has completed, return to the GitHub browser tab.
@@ -1083,19 +1083,19 @@ Task 8 -- Committing to Complete a Task
 11. Click **Compare & pull request**, which should appear on its own. If
     not, refresh.
 
-    ![](.\images/media/image96.png){width="4.718160542432196in"
+    ![](./images/image96.png){width="4.718160542432196in"
     height="0.7603215223097113in"}
 
 12. Change the **base fork** to point at your project. By default it
     points at the original Microsoft repo, so be sure to change it.
 
-    ![](.\images/media/image97.png){width="6.5in"
+    ![](./images/image97.png){width="6.5in"
     height="1.3694444444444445in"}
 
 13. The title should initialize to the commit message entered earlier.
     Click **Create pull request**.
 
-    ![](.\images/media/image98.png){width="6.5in"
+    ![](./images/image98.png){width="6.5in"
     height="2.1694444444444443in"}
 
 14. Return to Visual Studio Code.
@@ -1109,27 +1109,27 @@ Task 8 -- Committing to Complete a Task
 15. Under **GitHub Pull Requests \| All**, right-click the pull request
     and select **Checkout Pull Request**.
 
-    ![](.\images/media/image99.png){width="4.2390529308836395in"
+    ![](./images/image99.png){width="4.2390529308836395in"
     height="1.4685662729658793in"}
 
 16. Expand the **Changes in Pull Request** tree.
 
-    ![](.\images/media/image100.png){width="2.718409886264217in"
+    ![](./images/image100.png){width="2.718409886264217in"
     height="1.458150699912511in"}
 
 17. Select the **Description** from under the original pull request.
 
-    ![](.\images/media/image101.png){width="2.6871642607174104in"
+    ![](./images/image101.png){width="2.6871642607174104in"
     height="0.9373829833770778in"}
 
 18. Review the details of the pull request.
 
-    ![](.\images/media/image102.png){width="6.5in"
+    ![](./images/image102.png){width="6.5in"
     height="1.5493055555555555in"}
 
 19. Click **Merge pull request** and confirm the merge.
 
-    ![](.\images/media/image103.png){width="3.218347550306212in"
+    ![](./images/image103.png){width="3.218347550306212in"
     height="0.5311832895888015in"}
 
     \> **Talk track:** Once the deployment works its way through build
@@ -1141,7 +1141,7 @@ Task 8 -- Committing to Complete a Task
     log in again) and confirm the airports are sorted by city now
     (scroll down past the airports with no city name).
 
-    ![](.\images/media/image104.png){width="5.0618667979002625in"
+    ![](./images/image104.png){width="5.0618667979002625in"
     height="4.6556681977252845in"}
 
 22. Return to the Azure DevOps tab open to the Kanban board.
@@ -1155,13 +1155,13 @@ Task 8 -- Committing to Complete a Task
 23. The user story should have already moved to the **Closed** state and
     column. Click to open it.
 
-    ![](.\images/media/image105.png){width="2.312211286089239in"
+    ![](./images/image105.png){width="2.312211286089239in"
     height="1.8331036745406823in"}
 
 24. The commit and pull request should now be visible under
     **Development**.
 
-    ![](.\images/media/image106.png){width="2.4996872265966754in"
+    ![](./images/image106.png){width="2.4996872265966754in"
     height="1.5727198162729659in"}
 
 Summary
