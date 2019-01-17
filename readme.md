@@ -50,6 +50,8 @@ The key takeaways of the demo are:
     creating business value.
 
 ## Prerequisites
+=============
+
 These items are required for this demo.
 
 1.  A GitHub account from <https://github.com>.
@@ -74,8 +76,6 @@ These items are required for this demo.
 ## Demo Setup
 You will need to perform these steps prior to presenting this demo.
 
-1.  Fork the GitHub project at
-    [https://github.com/Microsoft/ContosoAir/](https://na01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgithub.com%2FMicrosoft%2FContosoAir%2F&data=02%7C01%7Csraj%40microsoft.com%7Cad53721c5cd84d53603808d6436a6fe4%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C636770521758495618&sdata=clPq649M5gB1RKos1J6sZZcQrPFUV7CSwUvle6EYlp8%3D&reserved=0).
 
 2.  Clone the GitHub repo locally and open it in Visual Studio Code.
 
@@ -85,7 +85,7 @@ You will need to perform these steps prior to presenting this demo.
 4.  Have two separate browser tabs open and logged in: one on the GitHub
     project root and one on the Azure portal.
 
-
+============
 
 ## Demo Scenario
 
@@ -106,7 +106,9 @@ more on generating business value.
 Task 1 -- Installing Azure Pipelines
 ------------------------------------
 
-1.  Switch to the browser tab open to the root of your GitHub fork. It
+1. Fork the GitHub project at
+    [https://github.com/Microsoft/ContosoAir/](https://na01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgithub.com%2FMicrosoft%2FContosoAir%2F&data=02%7C01%7Csraj%40microsoft.com%7Cad53721c5cd84d53603808d6436a6fe4%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C636770521758495618&sdata=clPq649M5gB1RKos1J6sZZcQrPFUV7CSwUvle6EYlp8%3D&reserved=0). 
+1. Switch to the browser tab open to the root of your GitHub fork. It
     should be something like <https://github.com/account/ContosoAir>.
 
     \> **Talk track:** In this demo, we will help Contoso Air revamp a
