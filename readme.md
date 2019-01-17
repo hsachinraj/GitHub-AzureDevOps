@@ -1,5 +1,4 @@
-Overview
-========
+# Overview
 
 GitHub hosts over 25 million repositories containing applications of all
 shapes and sizes. But GitHub is just a start---those applications still
@@ -34,8 +33,7 @@ In this demo, you'll see how easy it is to set up Azure Pipelines and
 Azure Boards with your GitHub projects and how you can start seeing
 benefits immediately.
 
-Key Takeaways
-=============
+# Key Takeaways
 
 The key takeaways of the demo are:
 
@@ -51,9 +49,7 @@ The key takeaways of the demo are:
     DevOps lifecycle that enables companies to focus their efforts on
     creating business value.
 
-Prerequisites
--------------
-
+## Prerequisites
 These items are required for this demo.
 
 1.  A GitHub account from <https://github.com>.
@@ -75,9 +71,7 @@ These items are required for this demo.
 8.  GitHub Pull Requests extension for Visual Studio Code installed from
     <https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github>.
 
-Demo Setup
-----------
-
+## Demo Setup
 You will need to perform these steps prior to presenting this demo.
 
 1.  Fork the GitHub project at
@@ -91,22 +85,9 @@ You will need to perform these steps prior to presenting this demo.
 4.  Have two separate browser tabs open and logged in: one on the GitHub
     project root and one on the Azure portal.
 
-Demo Cleanup
-------------
 
-After performing the demo, there are a few things you'll need to do to
-reset the state.
 
-1.  Delete the Azure resource group created during the demo.
-
-2.  Delete the Azure DevOps project created for the demo.
-
-3.  Delete the GitHub fork created for the demo.
-
-4.  Uninstall Azure Pipelines from your GitHub account.
-
-Demo Scenario
-=============
+## Demo Scenario
 
 In this demo, we'll be illustrating the integration and automation
 benefits of Azure DevOps. We will take on the role of helping a
@@ -121,9 +102,6 @@ process so that they can spin up all the infrastructure needed to deploy
 and host the application without any manual intervention. Once this
 process is in place, it will free up their technology teams to focus
 more on generating business value.
-
-Demo Script
-===========
 
 Task 1 -- Installing Azure Pipelines
 ------------------------------------
