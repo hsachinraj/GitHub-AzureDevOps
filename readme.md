@@ -111,7 +111,7 @@ Task 1 -- Installing Azure Pipelines
 1. Switch to the browser tab open to the root of your GitHub fork. It
     should be something like <https://github.com/account/ContosoAir>.
 
-    \> **Talk track:** In this demo, we will help Contoso Air revamp a
+    In this demo, we will help Contoso Air revamp a
     critical component of their DevOps scenario. Like all airlines, they
     rely on their web site to generate and manage business
     opportunities. However, the current processes they have in place to
@@ -132,16 +132,16 @@ Task 1 -- Installing Azure Pipelines
     ![](./images/image1.png){width="5.749281496062992in"
     height="0.49993766404199474in"}
 
-3.  Search for **"pipelines"** and click **Azure Pipelines**.
-
-    ![](./images/image2.png){width="5.634712379702537in"
-    height="1.3956583552055992in"}
-
-    \> **Talk track:** Azure Pipelines is free to use for both public
+3.  Search for **"pipelines"** and click **Azure Pipelines**.  Azure Pipelines is free to use for both public
     and private repos. If you have a need to scale your builds, you can
     add parallel job support for a nominal fee. Installing it into your
     GitHub account involves just a few clicks, and you can configure
     exactly which repos you want to grant it access to.
+
+    ![](./images/image2.png){width="5.634712379702537in"
+    height="1.3956583552055992in"}
+
+    
 
 4.  Scroll to the bottom and click **Install it for free**.
 
@@ -173,11 +173,8 @@ Task 1 -- Installing Azure Pipelines
 
 Task 2 -- Configuring an Azure Continuous Integration Pipeline
 --------------------------------------------------------------
-
-\> **Talk track:** Now that Azure Pipelines has been installed in the
-GitHub account, we can configure Azure DevOps to use it. We created an
-empty Azure DevOps project ahead of time to hold and run the pipelines
-we need for continuous integration and continuous delivery. The first
+Now that Azure Pipelines has been installed in the GitHub account, we can configure Azure DevOps to use it. We created an
+empty Azure DevOps project ahead of time to hold and run the pipelines we need for continuous integration and continuous delivery. The first
 thing we'll do is to create the build pipeline.
 
 1.  Select the organization and Azure DevOps project created ahead of
@@ -275,12 +272,9 @@ thing we'll do is to create the build pipeline.
 Task 3 -- Configuring an Azure Continuous Delivery Pipeline
 -----------------------------------------------------------
 
-\> **Talk track:** Now that the build pipeline has been created and the
-first build has completed, we can turn our attention to creating a
-release pipeline. Like the build templates, there are many packaged
-options available that cover common deployment scenarios, such as
-publishing to Azure. But to illustrate how flexible and productive the
-experience is, we will build this pipeline from an empty template.
+ Now that the build pipeline has been created and the first build has completed, we can turn our attention to creating a
+release pipeline. Like the build templates, there are many packaged options available that cover common deployment scenarios, such as
+publishing to Azure. But to illustrate how flexible and productive the experience is, we will build this pipeline from an empty template.
 
 1.  Click **Release**.
 
@@ -292,8 +286,7 @@ experience is, we will build this pipeline from an empty template.
     ![](./images/image14.png){width="2.239303368328959in"
     height="0.6457524059492563in"}
 
-    \> **Talk track:** The first item to define in a release pipeline is
-    exactly what will be released and when. In our case, it's the output
+    \> The first item to define in a release pipeline is exactly what will be released and when. In our case, it's the output
     generated from the build pipeline. Note that we could also assign a
     schedule, such as if we wanted to release the latest build every
     night.
