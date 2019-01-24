@@ -262,6 +262,8 @@ thing we'll do is to create the build pipeline.
 
 7.  Follow the build through to completion.
 
+====================
+
 Task 3 -- Configuring an Azure Continuous Delivery Pipeline
 -----------------------------------------------------------
 
@@ -271,13 +273,11 @@ publishing to Azure. But to illustrate how flexible and productive the experienc
 
 1.  Click **Release**.
 
-    ![](./images/image13.png){width="4.572344706911636in"
-    height="0.7603215223097113in"}
+    ![](./images/image13.png)
 
 2.  Click **Empty job**.
 
-    ![](./images/image14.png){width="2.239303368328959in"
-    height="0.6457524059492563in"}
+    ![](./images/image14.png)
 
     \> The first item to define in a release pipeline is exactly what will be released and when. In our case, it's the output
     generated from the build pipeline. Note that we could also assign a
@@ -286,110 +286,84 @@ publishing to Azure. But to illustrate how flexible and productive the experienc
 
 3.  Click **Add an artifact**.
 
-    ![](./images/image15.png){width="1.7081200787401576in"
-    height="2.0309962817147857in"}
+    ![](./images/image15.png)
 
 4.  Set **Source** to the build pipeline created earlier and **Default
     version** to **Latest**. Change the **Source alias** to
     **"\_ContosoAir-CI"** and click **Add**.
 
-    ![](./images/image16.png){width="2.8538101487314087in"
-    height="3.6662084426946633in"}
+    ![](./images/image16.png)
 
-    \> **Talk track:** As we did with continuous integration starting on
-    a source commit, we also want to have this pipeline automatically
+    \> As we did with continuous integration starting on a source commit, we also want to have this pipeline automatically
     start when the build pipeline completes. It's just as easy.
 
 5.  Click the **Triggers** button on the artifact.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML38b9ea3a.PNG](./images/image17.png){width="1.8125in"
-    height="1.2395833333333333in"}
+    ![](./images/image17.png)
 
 6.  **Enable** continuous integration.
 
-    ![](./images/image18.png){width="3.176686351706037in"
-    height="1.2185979877515312in"}
+    ![](./images/image18.png)
 
-    \> **Talk track:** We also have the option of adding quality gates
-    to the release process. For example, we could require that a
-    specific user or group approve a release before it continues, or
-    that they approve it after it's been deployed. These gates provide
-    notifications to the necessary groups, as well as polling support if
-    you're automating the gates using something dynamic, such as an
-    Azure function, REST API, work item query, and more. We won't add
-    any of that here, but we could easily come back and do it later on.
+    \>  We also have the option of adding quality gates to the release process. For example, we could require that a
+    specific user or group approve a release before it continues, or that they approve it after it's been deployed. These gates provide
+    notifications to the necessary groups, as well as polling support if you're automating the gates using something dynamic, such as an
+    Azure function, REST API, work item query, and more. We won't add any of that here, but we could easily come back and do it later on.
 
 7.  Click the **pre-deployment conditions** button.
 
-    ![](./images/image19.png){width="2.6246719160104988in"
-    height="1.072782152230971in"}
+    ![](./images/image19.png)
 
 8.  Review pre-deployment condition options.
 
-    ![](./images/image20.png){width="3.3537478127734035in"
-    height="1.3227515310586178in"}
+    ![](./images/image20.png)
 
-    \> **Talk track:** In this pipeline, we're going to need to specify
-    the same resource group in multiple tasks, so it's a good practice
-    to use a pipeline variable. We'll add one here for the new Azure
-    resource group we want to provision our resources to. Note that
-    there are also a variety of deployment options we can configure, as
-    well as a retention policy.
+    \>  In this pipeline, we're going to need to specify the same resource group in multiple tasks, so it's a good practice
+    to use a pipeline variable. We'll add one here for the new Azure resource group we want to provision our resources to. Note that
+    there are also a variety of deployment options we can configure, as well as a retention policy.
 
 9.  Select the **Variables** tab.
 
-    ![](./images/image21.png){width="4.676498250218723in"
-    height="1.3852438757655292in"}
+    ![](./images/image21.png)
 
 10. **Add** a **resourcegroup** variable that is not currently used by
     an existing resource group in your Azure account (**"contosoair"**
     will be used in this script).
 
-    ![](./images/image22.png){width="3.22876312335958in"
-    height="1.7601968503937009in"}
+    ![](./images/image22.png)
 
-    \> **Talk track:** Also, just like the build pipeline, the release
-    pipeline is really just a set of tasks. There are many
-    out-of-the-box tasks available, and you can build your own if
-    needed. The first task our release requires is to set up the Azure
-    deployment environment if it doesn't yet exist. After we add the
-    task, I can authorize access to the Azure account I want to deploy
-    to and instruct it to use the variable name we just specified for
-    the resource group name.
+    \>  Also, just like the build pipeline, the release pipeline is really just a set of tasks. There are many
+    out-of-the-box tasks available, and you can build your own if needed. The first task our release requires is to set up the Azure
+    deployment environment if it doesn't yet exist. After we add the task, I can authorize access to the Azure account I want to deploy
+    to and instruct it to use the variable name we just specified for the resource group name.
 
 11. Select the **Tasks** tab.
 
-    ![](./images/image23.png){width="4.811898512685914in"
-    height="0.9061362642169729in"}
+    ![](./images/image23.png)
 
 12. Click the **Add task** button.
 
-    ![](./images/image24.png){width="2.0726574803149607in"
-    height="0.708244750656168in"}
+    ![](./images/image24.png)
 
 13. Search for **"resource"** and **Add** an **Azure Resource Group
     Deployment** task.
 
-    ![](./images/image25.png){width="4.957713254593176in"
-    height="2.5725951443569555in"}
+    ![](./images/image25.png)
 
 14. Select the newly created task.
 
-    ![](./images/image26.png){width="4.030745844269466in"
-    height="1.3123359580052494in"}
+    ![](./images/image26.png)
 
 15. Select and authorize an Azure subscription.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML393f8328.PNG](./images/image27.png){width="4.666666666666667in"
-    height="0.6666666666666666in"}
+    ![](./images/image27.png)
 
 16. Set the **Resource group** to **"\$(resourcegroup)"** and select a
     **Location**.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML42d91670.PNG](./images/image28.png){width="3.0in"
-    height="1.5in"}
+    ![](./images/image28.png)
 
-    \> **Talk track:** Rather than having to manually create the Azure
+    \>  Rather than having to manually create the Azure
     resources required to host the web app, the team has defined an
     Azure Resource Manager---or ARM---template that describes the
     environment in JSON. This allows the environment definition to be
@@ -413,10 +387,9 @@ publishing to Azure. But to illustrate how flexible and productive the experienc
     part of the app service name in Azure, so please limit it to
     supported characters.
 
-    ![](./images/image29.png){width="4.103653762029746in"
-    height="2.8017333770778654in"}
+    ![](./images/image29.png)
 
-    \> **Talk track:** When this task completes, it will have generated
+    \>  When this task completes, it will have generated
     an Azure resource group with the resources required to run our
     application. However, the ARM template does some processing of the
     variables to generate names for the resources based on the input
@@ -430,26 +403,22 @@ publishing to Azure. But to illustrate how flexible and productive the experienc
 
 18. Click the **Add task** button.
 
-    ![](./images/image24.png){width="2.0726574803149607in"
-    height="0.708244750656168in"}
+    ![](./images/image24.png)
 
 19. Search for **"arm"** and select **Learn more \| More information**.
     This will open the GitHub project for this extension in a new tab.
 
-    ![](./images/image30.png){width="5.415989720034996in"
-    height="1.645627734033246in"}
+    ![](./images/image30.png)
 
 20. Click the link to the Visual Studio Marketplace.
 
-    ![](./images/image31.png){width="4.905636482939633in"
-    height="1.4998129921259842in"}
+    ![](./images/image31.png)
 
 21. Close the new tab.
 
-    ![](./images/image32.png){width="3.7182852143482066in"
-    height="2.8225634295713036in"}
+    ![](./images/image32.png)
 
-    \> **Talk track:** Now let's get back to adding the ARM Outputs
+    \> Now let's get back to adding the ARM Outputs
     task. The key variable we care about here is the name of the app
     service created, which our ARM template has specified as an output.
     This task will populate it for us to use as the "web" variable in
@@ -457,21 +426,18 @@ publishing to Azure. But to illustrate how flexible and productive the experienc
 
 22. **Add** an **ARM Outputs** task.
 
-    ![](./images/image33.png){width="4.3536220472440945in"
-    height="1.8122736220472442in"}
+    ![](./images/image33.png)
 
 23. Select the newly created task.
 
-    ![](./images/image34.png){width="4.114069335083115in"
-    height="1.3539971566054243in"}
+    ![](./images/image34.png)
 
 24. Select the same subscription from the previous task and enter the
     same resource group variable name.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML42ecfcec.PNG](./images/image35.png){width="3.75in"
-    height="1.3645833333333333in"}
+    ![](./images/image35.png)
 
-    \> **Talk track:** Finally, we can deploy the app service. We'll use
+    \> Finally, we can deploy the app service. We'll use
     the same subscription as earlier and specify the web variable as the
     name of the app service we want to deploy to. By this time in the
     pipeline, it will have been filled in for us by the ARM Outputs
@@ -480,39 +446,33 @@ publishing to Azure. But to illustrate how flexible and productive the experienc
 
 25. Click the **Add task** button.
 
-    ![](./images/image24.png){width="2.0726574803149607in"
-    height="0.708244750656168in"}
+    ![](./images/image24.png)
 
 26. Search for **"app service"** and **Add** an **Azure App Service
     Deploy** task.
 
-    ![](./images/image36.png){width="4.3536220472440945in"
-    height="3.176686351706037in"}
+    ![](./images/image36.png)
 
 27. Select the newly created task.
 
-    ![](./images/image37.png){width="4.093238188976378in"
-    height="2.405949256342957in"}
+    ![](./images/image37.png)
 
 28. Select the same subscription as earlier.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML38dcffeb.PNG](./images/image38.png){width="4.354166666666667in"
-    height="0.7708333333333334in"}
+    ![]](./images/image38.png)
 
 29. Enter the **App Service name** of **"\$(web)"**.
 
-    ![](./images/image39.png){width="2.7392410323709537in"
-    height="0.9894597550306212in"}
+    ![](./images/image39.png)
 
 30. **Save** the pipeline.
 
-    ![](./images/image40.png){width="3.582884951881015in"
-    height="0.4686909448818898in"}
+    ![](./images/image40.png)
 
 Task 4 -- Invoking Continuous Delivery from GitHub to Azure
 -----------------------------------------------------------
 
-\> **Talk track:** Now that we have our pipelines in place, it's time to
+\>  Now that we have our pipelines in place, it's time to
 commit a change to the master branch on GitHub. We're going to pull down
 the azure-pipelines.yml file added by Azure DevOps during the build
 creation and commit a slight edit to trigger the CI/CD process.
@@ -522,15 +482,13 @@ creation and commit a slight edit to trigger the CI/CD process.
 2.  From the **Source Control** tab, select **Sync** from the **More
     Actions** dropdown.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML1364534f.PNG](./images/image41.png){width="4.958333333333333in"
-    height="2.5in"}
+    ![](./images/image41.png)
 
 3.  From the **Explorer** tab, open **azure-pipelines.yml**.
 
-    ![](./images/image42.png){width="2.1768110236220473in"
-    height="3.1558552055993in"}
+    ![](./images/image42.png)
 
-    \> **Talk track:** Before we make our change, let's take a quick
+    \>  Before we make our change, let's take a quick
     look at the build tasks. There are four steps required for the
     build. First, deployment templates are copied to a target folder for
     use during the release process. Next, the project is built with NPM.
@@ -551,7 +509,7 @@ creation and commit a slight edit to trigger the CI/CD process.
 
 8.  Press **Ctrl+S** to save the file.
 
-    \> **Talk track:** Now we can commit and push the updated build
+    \>  Now we can commit and push the updated build
     definition to GitHub. This will invoke a continuous integration
     build in Azure DevOps, which will trigger a continuous delivery to
     Azure upon completion.
@@ -560,14 +518,12 @@ creation and commit a slight edit to trigger the CI/CD process.
     **"Updated build pipeline"** and press **Ctrl+Enter** to commit.
     Confirm if prompted.
 
-    ![](./images/image43.png){width="3.6453772965879265in"
-    height="1.6352121609798775in"}
+    ![](./images/image43.png)
 
 10. Press the **Synchronize Changes** button at the bottom of the window
     to push the commit to the server. Confirm if prompted.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML136c0f0b.PNG](./images/image44.png){width="1.9375in"
-    height="0.71875in"}
+    ![](./images/image44.png)
 
     \> **Talk track:** Back in Azure DevOps, we can see that our build
     pipeline has kicked off a new build. We can follow as it executes
@@ -578,23 +534,19 @@ creation and commit a slight edit to trigger the CI/CD process.
 
 11. Return to Azure DevOps and navigate to the **Builds** hub.
 
-    ![](./images/image45.png){width="1.6039665354330708in"
-    height="1.3644127296587927in"}
+    ![](./images/image45.png)
 
 12. Click the new build.
 
-    ![](./images/image46.png){width="2.520518372703412in"
-    height="1.5102274715660542in"}
+    ![](./images/image46.png)
 
 13. Track the build tasks.
 
-    ![](./images/image47.png){width="6.5in"
-    height="3.2263888888888888in"}
+    ![](./images/image47.png)
 
 14. Follow the build through to completion.
 
-    ![](./images/image48.png){width="5.895096237970254in"
-    height="1.7497812773403325in"}
+    ![](./images/image48.png)
 
     \> **Talk track:** Now that the build has completed, let's check out
     the release. It was automatically invoked by the successful
@@ -605,27 +557,25 @@ creation and commit a slight edit to trigger the CI/CD process.
 
 15. Navigate to the **Releases** hub.
 
-    ![](./images/image49.png){width="1.6039665354330708in"
-    height="1.3644127296587927in"}
+    ![](./images/image49.png)
 
 16. Select the new release. If one is not immediately available, click
     the **Refresh** option.
 
-    ![](./images/image50.png){width="5.332666229221347in"
-    height="1.4685662729658793in"}
+    ![](./images/image50.png)
 
 17. Click **In progress** to follow the release process.
 
-    ![](./images/image51.png){width="2.312211286089239in"
-    height="2.041411854768154in"}
+    ![](./images/image51.png)
 
 18. Note that it will take a few minutes (around 5 at the time of
     drafting) for the app to finish deploying due to heavy first-time
     operations. Move ahead to the next step while it works in the
     backgroud.
 
-    ![](./images/image52.png){width="6.5in"
-    height="3.245138888888889in"}
+    ![](./images/image52.png)
+    
+=========================
 
 Task 5 -- Reviewing the ARM template
 ------------------------------------
