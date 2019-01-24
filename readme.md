@@ -175,31 +175,24 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
 empty Azure DevOps project ahead of time to hold and run the pipelines we need for continuous integration and continuous delivery. The first
 thing we'll do is to create the build pipeline.
 
-1.  Select the organization and Azure DevOps project created ahead of
-    time.
+1.  Select the organization and Azure DevOps project that you want to use. If you do not have one, you can create for free at 
 
-    ![](./images/image8.png){width="3.8745155293088365in"
-    height="4.218222878390201in"}
+    ![](./images/image8.png)
 
 2.  Select the forked repo.
 
     ![](./images/image9.png){width="5.145190288713911in"
     height="1.7914424759405074in"}
 
-    \> **Talk track:** Every build pipeline is simply a set of tasks.
-    Whether it's copying files, compiling source, or publishing
-    artifacts, the existing library of tasks covers the vast majority of
-    scenarios. You can even create your own if you have specialized
-    needs not already covered. We're going to use YAML, a markup syntax
-    that lends itself well to describing the build pipeline. Note that
-    the Node.js pipeline as a starting point based on an analysis of our
-    source project. We'll replace the contents with the final YAML
+    \>Every build pipeline is simply a set of tasks. Whether it's copying files, compiling source, or publishing
+    artifacts, the existing library of tasks covers the vast majority of scenarios. You can even create your own if you have specialized
+    needs not already covered. We're going to use YAML, a markup syntax that lends itself well to describing the build pipeline. Note that
+    the Node.js pipeline as a starting point based on an analysis of our source project. We'll replace the contents with the final YAML
     required for our project.
 
 3.  Select the recommended template.
 
-    ![](./images/image10.png){width="3.6662084426946633in"
-    height="1.7393657042869641in"}
+    ![](./images/image10.png)
 
 4.  Replace the default template with the YAML below.
 
@@ -256,14 +249,12 @@ thing we'll do is to create the build pipeline.
 
 5.  Click **Save and run**.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTMLe600c49.PNG](./images/image11.png){width="2.3229166666666665in"
-    height="0.5625in"}
+    ![](./images/image11.png)
 
 6.  Confirm the **Save and run** to commit the YAML definition directly
     to the master branch of the repo.
 
-    ![](./images/image12.png){width="4.020330271216098in"
-    height="3.54122375328084in"}
+    ![](./images/image12.png)
 
 7.  Follow the build through to completion.
 
