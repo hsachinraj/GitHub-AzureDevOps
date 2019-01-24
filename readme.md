@@ -49,8 +49,11 @@ The key takeaways of the demo are:
     DevOps lifecycle that enables companies to focus their efforts on
     creating business value.
 
-## Prerequisites
+
 =============
+
+## Prerequisites
+
 
 These items are required for this demo.
 
@@ -145,31 +148,26 @@ Task 1 -- Installing Azure Pipelines
 
 4.  Scroll to the bottom and click **Install it for free**.
 
-    ![](./images/image3.png){width="6.0375in"
-    height="3.214583333333333in"}
+    ![](./images/image3.png)
 
 5.  If you have multiple **GitHub** accounts, select the one you forked
     the project to from the **Switch billing account** dropdown.
 
-    ![](./images/image4.png){width="5.051452318460193in"
-    height="2.8850557742782152in"}
+    ![](./images/image4.png)
 
 6.  Click **Complete order and begin installation**.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML329dc28.PNG](./images/image5.png){width="4.886805555555555in"
-    height="0.8666666666666667in"}
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML329dc28.PNG](./images/image5.png)
 
     Note that if you previously installed Azure Pipelines, you may need
     to click **grant this app access** instead.
 
-    ![](./images/image6.png){width="4.916052055993001in"
-    height="0.8332294400699912in"}
+    ![](./images/image6.png)
 
 7.  Select the repositories you want to include (or **All
     repositories**) and click **Install**.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML349c700b.PNG](./images/image7.png){width="4.875in"
-    height="4.447916666666667in"}
+    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML349c700b.PNG](./images/image7.png)
 
 Task 2 -- Configuring an Azure Continuous Integration Pipeline
 --------------------------------------------------------------
