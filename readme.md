@@ -196,6 +196,8 @@ thing we'll do is to create the build pipeline.
 
 4.  Replace the default template with the YAML below.
 
+    ````yaml
+
     1.  resources:
 
         \- repo: self
@@ -246,6 +248,8 @@ thing we'll do is to create the build pipeline.
         \- task: PublishBuildArtifacts\@1
 
         displayName: \'Publish Artifact: drop\'
+
+    ````
 
 5.  Click **Save and run**.
 
