@@ -132,8 +132,8 @@ Task 1 -- Installing Azure Pipelines
 
 2.  Navigate to the **GitHub Marketplace**.
 
-    ![](./images/image1.png){width="5.749281496062992in"
-    height="0.49993766404199474in"}
+    ![](./images/image1.png)
+   
 
 3.  Search for **"pipelines"** and click **Azure Pipelines**.  Azure Pipelines is free to use for both public
     and private repos. If you have a need to scale your builds, you can
@@ -141,8 +141,8 @@ Task 1 -- Installing Azure Pipelines
     GitHub account involves just a few clicks, and you can configure
     exactly which repos you want to grant it access to.
 
-    ![](./images/image2.png){width="5.634712379702537in"
-    height="1.3956583552055992in"}
+    ![](./images/image2.png)
+   
 
     
 
@@ -157,7 +157,7 @@ Task 1 -- Installing Azure Pipelines
 
 6.  Click **Complete order and begin installation**.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML329dc28.PNG](./images/image5.png)
+    ![](./images/image5.png)
 
     Note that if you previously installed Azure Pipelines, you may need
     to click **grant this app access** instead.
@@ -167,7 +167,7 @@ Task 1 -- Installing Azure Pipelines
 7.  Select the repositories you want to include (or **All
     repositories**) and click **Install**.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML349c700b.PNG](./images/image7.png)
+    ![](./images/image7.png)
 
 Task 2 -- Configuring an Azure Continuous Integration Pipeline
 --------------------------------------------------------------
@@ -181,8 +181,8 @@ thing we'll do is to create the build pipeline.
 
 2.  Select the forked repo.
 
-    ![](./images/image9.png){width="5.145190288713911in"
-    height="1.7914424759405074in"}
+    ![](./images/image9.png)
+   
 
     \>Every build pipeline is simply a set of tasks. Whether it's copying files, compiling source, or publishing
     artifacts, the existing library of tasks covers the vast majority of scenarios. You can even create your own if you have specialized
@@ -525,7 +525,7 @@ creation and commit a slight edit to trigger the CI/CD process.
 
     ![](./images/image44.png)
 
-    \> **Talk track:** Back in Azure DevOps, we can see that our build
+    \> Back in Azure DevOps, we can see that our build
     pipeline has kicked off a new build. We can follow as it executes
     the tasks we defined earlier, and even get a real-time view into
     what's going on at each step. When the build completes, we can
@@ -548,7 +548,7 @@ creation and commit a slight edit to trigger the CI/CD process.
 
     ![](./images/image48.png)
 
-    \> **Talk track:** Now that the build has completed, let's check out
+    \> Now that the build has completed, let's check out
     the release. It was automatically invoked by the successful
     completion of the build pipeline, and we can follow it all the same.
     Since this is the first time we're deploying, Azure will need to
@@ -576,74 +576,10 @@ creation and commit a slight edit to trigger the CI/CD process.
     ![](./images/image52.png)
     
 =========================
-
-Task 5 -- Reviewing the ARM template
-------------------------------------
-
-\> **Talk track:** A lot of what's going on now was directed by the ARM
-template the DevOps team put together. Let's take a tour through it to
-understand how it's structured.
-
-1.  Return to **Visual Studio Code**.
-
-2.  From the **Explorer** tab, open **/deployment/azuredeploy.json**.
-
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML13deea1f.PNG](./images/image53.png){width="3.1979166666666665in"
-    height="2.0625in"}
-
-    \> **Talk track:** The first section defines the parameters the
-    template expects. They can all be overridden externally by a
-    parameter file, and, in our case, via the pipeline editor. Note that
-    they all have default values, except for the environment parameter,
-    which must be supplied.
-
-3.  Review **parameters**.
-
-    ![](./images/image54.png){width="3.5620548993875767in"
-    height="2.3434569116360455in"}
-
-    \> **Talk track:** The variables section defines a set of template
-    variables that can be used to reduce complex expressions into an
-    easily manageable term. For example, you can concatenate a
-    combination of variables, resource properties, and other accessible
-    functions to generate names or parameters for other parts of the
-    template. In this case, the app service and Cosmos DB have their
-    names generated from the set of variables passed in. Note the
-    site\_web\_name variable, which is the name of the app service that
-    will be created and the string the release pipeline needs to know
-    for deployment.
-
-4.  Review **variables**.
-
-    ![](./images/image55.png){width="5.551388888888889in"
-    height="0.8332294400699912in"}
-
-    \> **Talk track:** The resources section defines the actual
-    resources to be created in Azure. This section can get pretty
-    complex and offers incredible flexibility for defining what your
-    application needs, how they are to be configured, and what
-    dependencies they have on each other. This template only explicitly
-    defines two resources: the Cosmos DB and the app service.
-
-5.  Review **resources**.
-
-    ![](./images/image56.png){width="5.332666229221347in"
-    height="1.9372583114610673in"}
-
-    \> **Talk track:** The outputs section provides a way to expose data
-    from this template for external services. This is the part that the
-    ARM Outputs task will use to populate the web pipeline variable with
-    the complex site\_web\_name template variable.
-
-6.  Review **outputs**.
-
-    ![](./images/image57.png){width="5.0618667979002625in"
-    height="1.2081824146981628in"}
-
-Task 6 -- Reviewing the Application and Azure Portal
+Task 5 -- Reviewing the Application and Azure Portal
 ----------------------------------------------------
 
-\> **Talk track:** While the resources finish spinning up, let's take a
+\> While the resources finish spinning up, let's take a
 quick tour of the Azure portal. It's thoughtfully designed and easy to
 use. The navigation on the left hand side provides access to major
 platform components, such as app services and virtual machines.
@@ -657,10 +593,9 @@ the solution our release pipeline created earlier.
 
 3.  Search for your resource group name and open it.
 
-    ![](./images/image58.png){width="2.239303368328959in"
-    height="1.2915048118985126in"}
+    ![](./images/image58.png)
 
-    \> **Talk track:** Our solution requires three resources in Azure.
+    \> Our solution requires three resources in Azure.
     The app service is our web site and the app service plan is the
     virtual server farm the site is deployed to. The Cosmos DB is a
     globally-distributed, multi-model database service instance we're
@@ -674,10 +609,9 @@ the solution our release pipeline created earlier.
     so the actual site itself won't be ready until the pipeline
     completes.
 
-    ![](./images/image59.png){width="4.093238188976378in"
-    height="1.4269050743657044in"}
+    ![](./images/image59.png)
 
-    \> **Talk track:** This view is the dashboard for the app service
+    \> This view is the dashboard for the app service
     and provides convenient access to virtually everything we could ever
     need to do. One of the most useful features for DevOps professionals
     is the "diagnose and solve problems" view that offers quick access
@@ -687,15 +621,13 @@ the solution our release pipeline created earlier.
 
 5.  Click **Diagnose and solve problems**.
 
-    ![](./images/image60.png){width="2.405949256342957in"
-    height="1.6664588801399824in"}
+    ![](./images/image60.png)
 
 6.  Review the options.
 
-    ![](./images/image61.png){width="6.0375in"
-    height="3.6486111111111112in"}
+    ![](./images/image61.png)
 
-    \> **Talk track:** The deployment center provides a single place to
+    \> The deployment center provides a single place to
     track deployment, such as those that are automated via pipeline. You
     can also use and track deployment slots, which allow you to have
     additional release targets. For example, you might make it a policy
@@ -706,15 +638,13 @@ the solution our release pipeline created earlier.
 
 7.  Click **Deployment Center**.
 
-    ![](./images/image62.png){width="2.426780402449694in"
-    height="1.6977045056867892in"}
+    ![](./images/image62.png)
 
 8.  Review the deployment.
 
-    ![](./images/image63.png){width="4.322376421697288in"
-    height="1.1665212160979876in"}
+    ![](./images/image63.png)
 
-    \> **Talk track:** The "application settings" view enables you to
+    \> The "application settings" view enables you to
     define system-level settings for the environment, such as versions
     of .NET or PHP. You can also configure virtual applications and
     directories, as well as application-level settings, such as
@@ -722,10 +652,9 @@ the solution our release pipeline created earlier.
 
 9.  Click **Application settings**.
 
-    ![](./images/image64.png){width="2.4784722222222224in"
-    height="1.2291666666666667in"}
+    ![](./images/image64.png)
 
-    \> **Talk track:** Application Insights is one of the most valuable
+    \> Application Insights is one of the most valuable
     services for DevOps teams. It provides performance tracking and
     management features for every level of an application. We haven't
     configured it for this project yet, but once it's in place, you can
@@ -737,10 +666,9 @@ the solution our release pipeline created earlier.
 
 10. Click **Application Insights**.
 
-    ![](./images/image65.png){width="2.4371948818897637in"
-    height="1.9476727909011373in"}
+    ![](./images/image65.png)
 
-    \> **Talk track:** One of the great benefits of a cloud platform is
+    \> One of the great benefits of a cloud platform is
     how easily you can scale a platform up and out. For example, we have
     the option here to scale our current application up to use a pretty
     powerful set of virtual hardware. Or, depending on our needs, we can
@@ -750,15 +678,13 @@ the solution our release pipeline created earlier.
 
 11. Click **Scale up**.
 
-    ![](./images/image66.png){width="2.510102799650044in"
-    height="1.3644127296587927in"}
+    ![](./images/image66.png)
 
 12. Review options.
 
-    ![](./images/image67.png){width="8.13263888888889in"
-    height="6.5in"}
+    ![](./images/image67.png)
 
-    \> **Talk track:** In addition to web sites, you can also build and
+    \> In addition to web sites, you can also build and
     deploy web jobs. These are standalone apps or scripts that can be
     invoked via web hook. You can also use them in combination with a
     scheduler to perform regular tasks, such as batch updates to your
@@ -766,24 +692,20 @@ the solution our release pipeline created earlier.
 
 13. Click **WebJobs**.
 
-    ![](./images/image68.png){width="2.520518372703412in"
-    height="2.760071084864392in"}
-
-    \> **Talk track:** There's also a console option for you to explore
+    ![](./images/image68.png)
+    \> There's also a console option for you to explore
     what's going on in your service. For example, let's get a directory
     listing of the web root.
 
 14. Click **Console**.
 
-    ![](./images/image69.png){width="2.3226268591426074in"
-    height="3.0308716097987753in"}
+    ![](./images/image69.png)
 
 15. Execute a **"dir"** command.
 
-    ![](./images/image70.png){width="4.1765616797900265in"
-    height="4.051576990376203in"}
+    ![](./images/image70.png)
 
-    \> **Talk track:** There are also plenty of built in monitoring and
+    \> There are also plenty of built in monitoring and
     alerting features. These save you a lot of time so you can focus on
     developing business value instead. And if you're looking for advice
     on places to improve the application, there's the App Service
@@ -792,184 +714,166 @@ the solution our release pipeline created earlier.
 
 16. Review monitoring options.
 
-    ![](./images/image71.png){width="1.9476727909011373in"
-    height="1.7601968503937009in"}
+    ![](./images/image71.png)
 
 17. Click **App Service Advisor**.
 
-    ![](./images/image72.png){width="1.926842738407699in"
-    height="1.3956583552055992in"}
+    ![](./images/image72.png)
 
 18. Review insights.
 
-    ![](./images/image73.png){width="5.655543525809274in"
-    height="2.0205807086614174in"}
+    ![](./images/image73.png)
 
-    \> **Talk track:** That was a quick tour of the app service
+    \> That was a quick tour of the app service
     configuration, so let's check out the actual site in the cloud. We
     just took a project in GitHub and set up a sophisticated, automated
     deployment to Azure in mere minutes!
 
 19. Click the **URL** to open the site.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML39096e7d.PNG](./images/image74.png){width="3.0833333333333335in"
-    height="0.5208333333333334in"}
+    ![](./images/image74.png)
 
 20. Review the site. Keep the browser window open for later.
 
-    ![](./images/image75.png){width="4.551514654418198in"
-    height="2.447610454943132in"}
+    ![](./images/image75.png)
+
+============
 
 Task 7 -- Managing GitHub Projects with Azure DevOps
 ----------------------------------------------------
 
-\> **Talk track:** Azure DevOps provides a wealth of project management
-functionality that spans Kanban boards, backlogs, team dashboards, and
-custom reporting. By connecting Azure Boards with GitHub repositories,
-you can create links between GitHub commits and pull requests to work
-items tracked in Azure Boards. This enables a seamless way for you to
-use GitHub for software development while using Azure Boards to plan and
-track your work.
+\> Azure Boards provides a wealth of project management functionality that spans Kanban boards, backlogs, team dashboards, and
+custom reporting. By connecting Azure Boards with GitHub repositories, teams can take advantage of the rich project management capabilities. You can create links between GitHub commits and pull requests to work items tracked in Azure Boards. This enables a seamless way for you to use GitHub for software development while using Azure Boards to plan and track your work.
 
 1.  Return to the Azure DevOps tab.
 
 2.  Navigate to **Boards \| Backlogs**.
 
-    ![](./images/image76.png){width="1.489397419072616in"
-    height="1.885181539807524in"}
+    ![](./images/image76.png)
 
-    \> **Talk track:** In our scenario, users will need to be able to
-    book flights by selecting the cities involved. We will create a new
-    user story to sort the airports listed in the booking form in
-    alphabetical order by city. Ordinarily we would create the user
-    story at a higher level and add tasks to define how the story is to
-    be implemented, but for our demo purposes here we'll leave it as a
+    \> In our scenario, users will need to be able to book flights by selecting the cities involved. We will create a new
+    user story to sort the airports listed in the booking form in alphabetical order by city. Ordinarily we would create the user
+    story at a higher level and add tasks to define how the story is to be implemented, but for our demo purposes here we'll leave it as a
     single work item.
 
 3.  Click **New Work Item** and add a user story with the title **"User
     can select airport by city"**. Press **Enter** to create.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML9701286.PNG](./images/image77.png){width="5.364583333333333in"
-    height="1.0625in"}
+    ![](./images/image77.png)
 
-    \> **Talk track:** In addition to working with work items in a
-    backlog, we have a very flexible Kanban board option. With the
-    board, we can edit items on a card in line, or even drag cards
-    around to change their state and assignment. Let's take ownership of
+    \> In addition to working with work items in a backlog, we have a very flexible Kanban board option. With the
+    board, we can edit items on a card in line, or even drag cards  around to change their state and assignment. Let's take ownership of
     the new user story so we can begin work.
 
 4.  Click **View as board**.
 
-    ![](./images/image78.png){width="4.530683508311461in"
-    height="0.9269674103237096in"}
+    ![](./images/image78.png)
 
 5.  Drag the newly created user story to the **Active** column.
 
-    ![](./images/image79.png){width="4.624421478565179in"
-    height="1.885181539807524in"}
+    ![](./images/image79.png)
 
 6.  Dropping the user story onto the **Active** column assigns it to you
     and sets its **State** to **Active**. Make note of the task ID for
     reference later during a future commit and pull request.
 
-    ![](./images/image80.png){width="2.333041338582677in"
-    height="1.781026902887139in"}
+    ![](./images/image80.png)
 
-\> **Talk track:** In order to complete our integration, we'll need to
-wire up a connection between this project and the GitHub repo.
+\> In order to complete our integration, we'll need to wire up a connection between this project and the GitHub repo.
 
 7.  Click **Project settings**.
 
-    ![](./images/image81.png){width="2.7809022309711287in"
-    height="0.5624300087489064in"}
+    ![](./images/image81.png)
 
 8.  Under **Boards**, select **GitHub connections**.
 
-    ![](./images/image82.png){width="1.8122736220472442in"
-    height="1.5623042432195975in"}
+    ![](./images/image82.png)
 
 9.  Click **Connect your GitHub account**.
 
-    ![](./images/image83.png){width="4.811898512685914in"
-    height="1.8226891951006123in"}
+    ![](./images/image83.png)
 
 10. Select the project repo and click **Save**.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML2712de8e.PNG](./images/image84.png){width="4.28125in"
-    height="1.4375in"}
+    ![](./images/image84.png)
 
-    \> **Talk track:** Let's take a look at our deployed site to see
+    \> Let's take a look at our deployed site to see
     what the current booking experience is like. As you can see, the
     airports appear to be sorted by airport code, which isn't the
     behavior we want our users to see.
 
 11. Return to the web app tab and click **Login**.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTMLe8868fc.PNG](./images/image85.png){width="1.7083333333333333in"
-    height="0.3541666666666667in"}
+    ![](./images/image85.png)
+   
+   
 
 12. Log in with any email and password.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTMLe88013a.PNG](./images/image86.png){width="4.572916666666667in"
-    height="2.8958333333333335in"}
+    ![](./images/image86.png)
+   
 
 13. Click **Book**.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTMLe876e60.PNG](./images/image87.png){width="1.6979166666666667in"
-    height="0.3541666666666667in"}
+    ![](./images/image87.png)
+   
 
 14. Expand the airport dropdown to note that it's not sorted
     alphabetically by city.
 
-    ![](./images/image88.png){width="4.738990594925634in"
-    height="4.457775590551181in"}
+    ![](./images/image88.png)
+   
+==============
 
 Task 8 -- Committing to Complete a Task
 ---------------------------------------
 
 1.  Return to **Visual Studio Code**.
 
-    \> **Talk track:** We'll start off by creating a new branch for this
+    \> We'll start off by creating a new branch for this
     task. The work itself is pretty straightforward. We just need to
     locate the place where airports are provided to the user experience
     and make sure they're being sorted by city name.
 
 2.  Click the **master** branch at the bottom of the window.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML137df3cb.PNG](./images/image89.png){width="1.6145833333333333in"
-    height="0.4895833333333333in"}
+    ![](./images/image89.png)
+   
 
 3.  From the top of the screen, click **Create new branch**.
 
-    ![](./images/image90.png){width="1.9789195100612424in"
-    height="0.9477985564304462in"}
+    ![](./images/image90.png)
+   
 
 4.  Enter the name **"airport-sorting"** and press **Enter**. This will
     activate the new branch.
 
-    ![](./images/image91.png){width="4.738990594925634in"
-    height="0.708244750656168in"}
+    ![](./images/image91.png)
+   
 
 5.  From the **Explorer** tab, open
     **src/services/book.form.service.js**.
 
-    ![](./images/image92.png){width="3.6870395888014in"
-    height="3.6245472440944884in"}
+    ![](./images/image92.png)
+   
 
 6.  Locate the **getForm** function and replace the existing
     **airports** initializer with the code below. This will sort the
     airports by city.
 
+    ````
     airports: this.\_airports.getAll().sort(function(first, second) {
 
     return first.city.localeCompare(second.city);})
 
-    ![](./images/image93.png){width="6.5in"
-    height="1.0541666666666667in"}
+    ````
+
+    ![](./images/image93.png)
+   
 
 7.  Press **Ctrl+S** to save the file.
 
-    \> **Talk track:** We'll skip testing this locally for the sake of
+    \> We'll skip testing this locally for the sake of
     the demo. Instead, we'll commit it using a comment that includes
     special syntax to link it to the Azure Boards task we saw earlier.
     Now this commit will become trackable from project management, as
@@ -980,17 +884,17 @@ Task 8 -- Committing to Complete a Task
     with the actual ID of the Azure Boards task. Press **Ctrl+Enter**
     and confirm the commit if prompted.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML97d87a7.PNG](./images/image94.png){width="3.875in"
-    height="1.28125in"}
+    ![](./images/image94.png)
+   
 
 9.  Click the **Publish Changes** button at the bottom of the screen.
 
-    ![C:\\Users\\Ed\\AppData\\Local\\Temp\\SNAGHTML13836058.PNG](./images/image95.png){width="2.0104166666666665in"
-    height="0.4375in"}
+    ![](./images/image95.png)
+   
 
 10. When the push has completed, return to the GitHub browser tab.
 
-    \> **Talk track:** With the commit pushed, we'll create a pull
+    \> With the commit pushed, we'll create a pull
     request to drive those changes back into the master branch. In this
     case we're inheriting the title from the commit, but having the pull
     request mention "Fixes AB\#ID" will link and complete the target
@@ -999,24 +903,24 @@ Task 8 -- Committing to Complete a Task
 11. Click **Compare & pull request**, which should appear on its own. If
     not, refresh.
 
-    ![](./images/image96.png){width="4.718160542432196in"
-    height="0.7603215223097113in"}
+    ![](./images/image96.png)
+   
 
 12. Change the **base fork** to point at your project. By default it
     points at the original Microsoft repo, so be sure to change it.
 
-    ![](./images/image97.png){width="6.5in"
-    height="1.3694444444444445in"}
+    ![](./images/image97.png)
+   
 
 13. The title should initialize to the commit message entered earlier.
     Click **Create pull request**.
 
-    ![](./images/image98.png){width="6.5in"
-    height="2.1694444444444443in"}
+    ![](./images/image98.png)
+   
 
 14. Return to Visual Studio Code.
 
-    \> **Talk track:** Now we'll switch to the other side of the pull
+    \> Now we'll switch to the other side of the pull
     request and take on the role of reviewer. We can use Visual Studio
     Code to check out the pull request, analyze changes, and comment.
     Assuming we trust the fix, we can merge the pull request to update
@@ -1025,30 +929,30 @@ Task 8 -- Committing to Complete a Task
 15. Under **GitHub Pull Requests \| All**, right-click the pull request
     and select **Checkout Pull Request**.
 
-    ![](./images/image99.png){width="4.2390529308836395in"
-    height="1.4685662729658793in"}
+    ![](./images/image99.png)
+   
 
 16. Expand the **Changes in Pull Request** tree.
 
-    ![](./images/image100.png){width="2.718409886264217in"
-    height="1.458150699912511in"}
+    ![](./images/image100.png)
+   
 
 17. Select the **Description** from under the original pull request.
 
-    ![](./images/image101.png){width="2.6871642607174104in"
-    height="0.9373829833770778in"}
+    ![](./images/image101.png)
+   
 
 18. Review the details of the pull request.
 
-    ![](./images/image102.png){width="6.5in"
-    height="1.5493055555555555in"}
+    ![](./images/image102.png)
+   
 
 19. Click **Merge pull request** and confirm the merge.
 
-    ![](./images/image103.png){width="3.218347550306212in"
-    height="0.5311832895888015in"}
+    ![](./images/image103.png)
+   
 
-    \> **Talk track:** Once the deployment works its way through build
+    \> Once the deployment works its way through build
     and release, we can confirm the new functionality.
 
 20. Follow the CI/CD pipeline through to completion.
@@ -1057,12 +961,12 @@ Task 8 -- Committing to Complete a Task
     log in again) and confirm the airports are sorted by city now
     (scroll down past the airports with no city name).
 
-    ![](./images/image104.png){width="5.0618667979002625in"
-    height="4.6556681977252845in"}
+    ![](./images/image104.png)
+   
 
 22. Return to the Azure DevOps tab open to the Kanban board.
 
-    \> **Talk track:** Since the user story we were working on was
+    \> Since the user story we were working on was
     linked in a pull request that was approved, Azure DevOps will
     automatically transition the state of the work item to "Closed". You
     can also see that the related GitHub commits and pull request were
@@ -1071,14 +975,14 @@ Task 8 -- Committing to Complete a Task
 23. The user story should have already moved to the **Closed** state and
     column. Click to open it.
 
-    ![](./images/image105.png){width="2.312211286089239in"
-    height="1.8331036745406823in"}
+    ![](./images/image105.png)
+   
 
 24. The commit and pull request should now be visible under
     **Development**.
 
-    ![](./images/image106.png){width="2.4996872265966754in"
-    height="1.5727198162729659in"}
+    ![](./images/image106.png)
+   
 
 Summary
 =======
