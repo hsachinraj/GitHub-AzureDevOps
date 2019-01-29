@@ -159,13 +159,18 @@ Task 1 -- Installing Azure Pipelines
 
     ![](./images/image5.png)
 
-    Note that if you previously installed Azure Pipelines, you may need
+    > Note that if you previously installed Azure Pipelines, you may need
     to click **grant this app access** instead.
 
     ![](./images/image6.png)
 
 7.  Select the repositories you want to include (or **All
     repositories**) and click **Install**.
+    
+    > **Note** that if you've previously installed Azure Pipelines, you may
+    need to toggle between the "All" and "Select" radio buttons to enable the 
+    wizard in Task 2. You can always create the pipeline directly from Azure
+    Pipelines if the wizard does not appear.
 
     ![](./images/image7.png)
 
@@ -198,16 +203,12 @@ thing we'll do is to create the build pipeline.
 
     ````yaml
 
-    resources:
-      - repo: self
-        queue:
-        name: Hosted VS2017
-        demands: npm
+    pool:  
+      vmImage: 'ubuntu-16.04' 
 
     steps:
       - task: CopyFiles@2
-        displayName: 'Copy Files to:
-          $(build.artifactstagingdirectory)/Templates'
+        displayName: 'Copy Files to: $(build.artifactstagingdirectory)/Templates'
         inputs:
           SourceFolder: deployment
           Contents: '*.json'
@@ -226,7 +227,7 @@ thing we'll do is to create the build pipeline.
           rootFolderOrFile: '$(Build.SourcesDirectory)'
           includeRootFolder: false
 
-      - task: PublishBuildArtifacts\@1
+      - task: PublishBuildArtifacts@1
         displayName: 'Publish Artifact: drop'
         
     ````
