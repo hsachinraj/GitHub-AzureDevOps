@@ -184,11 +184,11 @@ thing we'll do is to create the build pipeline.
     ![](./images/image9.png)
    
 
-    \>Every build pipeline is simply a set of tasks. Whether it's copying files, compiling source, or publishing
+    >Every build pipeline is simply a set of tasks. Whether it's copying files, compiling source, or publishing
     artifacts, the existing library of tasks covers the vast majority of scenarios. You can even create your own if you have specialized
-    needs not already covered. We're going to use YAML, a markup syntax that lends itself well to describing the build pipeline. Note that
-    the Node.js pipeline as a starting point based on an analysis of our source project. We'll replace the contents with the final YAML
-    required for our project.
+    needs not already covered. We're going to use YAML, a markup syntax that lends itself well to describing the build pipeline. Note
+    that the Node.js pipeline as a starting point based on an analysis of our source project. We'll replace the contents with the final
+    YAML required for our project.
 
 3.  Select the recommended template.
 
@@ -198,57 +198,37 @@ thing we'll do is to create the build pipeline.
 
     ````yaml
 
-    1.  resources:
-
-        \- repo: self
-
+    resources:
+      - repo: self
         queue:
-
         name: Hosted VS2017
-
         demands: npm
 
-        steps:
-
-        \- task: CopyFiles\@2
-
-        displayName: \'Copy Files to:
-        \$(build.artifactstagingdirectory)/Templates\'
-
+    steps:
+      - task: CopyFiles@2
+        displayName: 'Copy Files to:
+          $(build.artifactstagingdirectory)/Templates'
         inputs:
+          SourceFolder: deployment
+          Contents: '*.json'
+          TargetFolder: '$(build.artifactstagingdirectory)/Templates'
 
-        SourceFolder: deployment
-
-        Contents: \'\*.json\'
-
-        TargetFolder: \'\$(build.artifactstagingdirectory)/Templates\'
-
-        \- task: Npm\@1
-
-        displayName: \'npm custom\'
-
+      - task: Npm@1
+        displayName: 'npm custom'
         inputs:
+          command: custom
+          verbose: false
+          customCommand: 'install --production'
 
-        command: custom
-
-        verbose: false
-
-        customCommand: \'install \--production\'
-
-        \- task: ArchiveFiles\@2
-
-        displayName: \'Archive \$(Build.SourcesDirectory)\'
-
+      - task: ArchiveFiles@2
+        displayName: 'Archive $(Build.SourcesDirectory)'
         inputs:
+          rootFolderOrFile: '$(Build.SourcesDirectory)'
+          includeRootFolder: false
 
-        rootFolderOrFile: \'\$(Build.SourcesDirectory)\'
-
-        includeRootFolder: false
-
-        \- task: PublishBuildArtifacts\@1
-
-        displayName: \'Publish Artifact: drop\'
-
+      - task: PublishBuildArtifacts\@1
+        displayName: 'Publish Artifact: drop'
+        
     ````
 
 5.  Click **Save and run**.
