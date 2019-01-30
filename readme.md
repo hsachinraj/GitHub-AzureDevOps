@@ -61,7 +61,9 @@ These items are required for this demo.
 
 2.  An Azure account from <https://azure.com>.
 
-3.  An Azure DevOps account from <https://dev.azure.com>.
+3.  An Azure DevOps account from <https://dev.azure.com>
+
+**Note:** If you are using your own machine, you will also need  the following:
 
 4.  ARM Outputs extension installed in your Azure DevOps account from
     <https://marketplace.visualstudio.com/items?itemName=keesschollaart.arm-outputs>.
@@ -79,13 +81,12 @@ These items are required for this demo.
 ## Demo Setup
 You will need to perform these steps prior to presenting this demo.
 
+1.  Clone the GitHub repo locally and open it in Visual Studio Code.
 
-2.  Clone the GitHub repo locally and open it in Visual Studio Code.
-
-3.  Create a new Azure DevOps project, preferably named something like
+1.  Create a new Azure DevOps project, preferably named something like
     "ContosoAir".
 
-4.  Have two separate browser tabs open and logged in: one on the GitHub
+1.  Have two separate browser tabs open and logged in: one on the GitHub
     project root and one on the Azure portal.
 
 ============
@@ -106,65 +107,56 @@ and host the application without any manual intervention. Once this
 process is in place, it will free up their technology teams to focus
 more on generating business value.
 
-Task 1 -- Installing Azure Pipelines
-------------------------------------
+## Exercise 1: Setting up automated CI/CD pipelines with Azure Pipelines
+
+In this demo, we will help Contoso Air revamp a critical component of their DevOps scenario. Like all airlines, they rely on their web site to generate and manage business opportunities. However, the current processes they have in place to move a change from their source code to their production systems is time-consuming and open to human error. They use GitHub to manage their source code and want to host their production site on Azure, so it will be our job to automate everything in the middle. 
+
+This will involve setting up a pipeline so that commits to the GitHub
+repo invoke a continuous integration build in Azure DevOps. Once that build is complete, it will invoke a continuous delivery deployment to push the bits out to Azure, creating the required resources, if necessary. The first thing we need to do is to connect GitHub with Azure DevOps, which we can do via the Azure Pipelines
+extension in the GitHub Marketplace.
+
+============
+
+### Task 1 -- Installing Azure Pipelines
+
 
 1. Fork the GitHub project at
-    [https://github.com/Microsoft/ContosoAir/](https://na01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgithub.com%2FMicrosoft%2FContosoAir%2F&data=02%7C01%7Csraj%40microsoft.com%7Cad53721c5cd84d53603808d6436a6fe4%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C636770521758495618&sdata=clPq649M5gB1RKos1J6sZZcQrPFUV7CSwUvle6EYlp8%3D&reserved=0). 
+    [https://github.com/Microsoft/ContosoAir/](https://github.com/Microsoft/ContosoAir/). 
+
 1. Switch to the browser tab open to the root of your GitHub fork. It
-    should be something like <https://github.com/account/ContosoAir>.
+    should be something like **<https://github.com/{youraccount}/ContosoAir>**
 
-    In this demo, we will help Contoso Air revamp a
-    critical component of their DevOps scenario. Like all airlines, they
-    rely on their web site to generate and manage business
-    opportunities. However, the current processes they have in place to
-    move a change from their source code to their production systems is
-    time-consuming and open to human error. They use GitHub to manage
-    their source code and want to host their production site on Azure,
-    so it will be our job to automate everything in the middle. This
-    will involve setting up a pipeline so that commits to the GitHub
-    repo invoke a continuous integration build in Azure DevOps. Once
-    that build is complete, it will invoke a continuous delivery
-    deployment to push the bits out to Azure, creating the required
-    resources, if necessary. The first thing we need to do is to connect
-    GitHub with Azure DevOps, which we can do via the Azure Pipelines
-    extension in the GitHub Marketplace.
-
-2.  Navigate to the **GitHub Marketplace**.
+    
+1.  Navigate to the [**GitHub Marketplace**](https://github.com/marketplace).
 
     ![](./images/image1.png)
    
 
-3.  Search for **"pipelines"** and click **Azure Pipelines**.  Azure Pipelines is free to use for both public
-    and private repos. If you have a need to scale your builds, you can
-    add parallel job support for a nominal fee. Installing it into your
-    GitHub account involves just a few clicks, and you can configure
-    exactly which repos you want to grant it access to.
+1.  Search for **"pipelines"** and click **Azure Pipelines**.  
 
     ![](./images/image2.png)
    
+   
 
-    
-
-4.  Scroll to the bottom and click **Install it for free**.
+1.  Scroll to the bottom and click **Install it for free**. If you previously installed Azure Pipelines, select **Configure access** instead to skip steps 6-8. 
 
     ![](./images/image3.png)
 
-5.  If you have multiple **GitHub** accounts, select the one you forked
+    >**Note:** Azure Pipelines is free to use for both public and private repos. You get unlimited build minutes and 10 free parallel jobs for public repositories. For private repos, you get 1 free parallel job and 1800 minutes per month. If you have a need to scale your builds, you can add parallel job support for a nominal fee. I
+
+1.  If you have multiple **GitHub** accounts, select the one you forked
     the project to from the **Switch billing account** dropdown.
 
     ![](./images/image4.png)
 
-6.  Click **Complete order and begin installation**.
+1.  Click **Complete order and begin installation**.
 
     ![](./images/image5.png)
 
-    > Note that if you previously installed Azure Pipelines, you may need
-    to click **grant this app access** instead.
 
     ![](./images/image6.png)
 
-7.  Select the repositories you want to include (or **All
+1.  Select the repositories you want to include (or **All
     repositories**) and click **Install**.
     
     > **Note** that if you've previously installed Azure Pipelines, you may
@@ -174,13 +166,13 @@ Task 1 -- Installing Azure Pipelines
 
     ![](./images/image7.png)
 
-Task 2 -- Configuring an Azure Continuous Integration Pipeline
---------------------------------------------------------------
-Now that Azure Pipelines has been installed in the GitHub account, we can configure Azure DevOps to use it. We created an
-empty Azure DevOps project ahead of time to hold and run the pipelines we need for continuous integration and continuous delivery. The first
-thing we'll do is to create the build pipeline.
+===============
 
-1.  Select the organization and Azure DevOps project that you want to use. If you do not have one, you can create for free at 
+### Task 2 -- Configuring an Azure Continuous Integration Pipeline
+
+Now that Azure Pipelines has been installed in the GitHub account, we can configure Azure DevOps to use it. You may select an existing or create a new Azure DevOps project  to hold and run the pipelines we need for continuous integration and continuous delivery. The first thing we'll do is to create the build pipeline.
+
+1.  Select the organization and Azure DevOps project that you want to use. If you do not have one, you can create for free.
 
     ![](./images/image8.png)
 
@@ -189,11 +181,7 @@ thing we'll do is to create the build pipeline.
     ![](./images/image9.png)
    
 
-    >Every build pipeline is simply a set of tasks. Whether it's copying files, compiling source, or publishing
-    artifacts, the existing library of tasks covers the vast majority of scenarios. You can even create your own if you have specialized
-    needs not already covered. We're going to use YAML, a markup syntax that lends itself well to describing the build pipeline. Note
-    that the Node.js pipeline as a starting point based on an analysis of our source project. We'll replace the contents with the final
-    YAML required for our project.
+    >Every build pipeline is simply a set of tasks. Whether it's copying files, compiling source, or publishing artifacts, the existing library of tasks covers the vast majority of scenarios. You can even create your own if you have specialized needs not already covered. We're going to use YAML, a markup syntax that lends itself well to describing the build pipeline. Note that the Node.js pipeline as a starting point based on an analysis of our source project. We'll replace the contents with the final YAML required for our project.
 
 3.  Select the recommended template.
 
@@ -245,12 +233,9 @@ thing we'll do is to create the build pipeline.
 
 ====================
 
-Task 3 -- Configuring an Azure Continuous Delivery Pipeline
------------------------------------------------------------
+### Task 3 -- Configuring an Azure Continuous Delivery Pipeline
 
- Now that the build pipeline has been created and the first build has completed, we can turn our attention to creating a
-release pipeline. Like the build templates, there are many packaged options available that cover common deployment scenarios, such as
-publishing to Azure. But to illustrate how flexible and productive the experience is, we will build this pipeline from an empty template.
+ Now that the build pipeline has been created and the first build has completed, we can turn our attention to creating a release pipeline. Like the build templates, there are many packaged options available that cover common deployment scenarios, such as publishing to Azure. But to illustrate how flexible and productive the experience is, we will build this pipeline from an empty template.
 
 1.  Click **Release**.
 
@@ -265,31 +250,26 @@ publishing to Azure. But to illustrate how flexible and productive the experienc
     schedule, such as if we wanted to release the latest build every
     night.
 
-3.  Click **Add an artifact**.
+3.  Select the associated artifact. If the build artifact is not already associated, click **Add an artifact** instead.
 
-    ![](./images/image15.png)
+    ![](./images/image15-1.png)
 
 4.  Set **Source** to the build pipeline created earlier and **Default
-    version** to **Latest**. Change the **Source alias** to
-    **"\_ContosoAir-CI"** and click **Add**.
+    version** to **Latest**. Change the **Source alias**, if you want, to something like **"\_ContosoAir-CI"** and click **Add**. Note that this is an identifier (typically a short name) that uniquely identifies an artifact linked to the release pipeline. It cannot contain the characters: \ / : * ? < > | or double quotes
 
     ![](./images/image16.png)
 
-    \> As we did with continuous integration starting on a source commit, we also want to have this pipeline automatically
-    start when the build pipeline completes. It's just as easy.
+    \> As we did with continuous integration starting on a source commit, we also want to have this pipeline automatically start when the build pipeline completes. It's just as easy.
 
 5.  Click the **Triggers** button on the artifact.
 
     ![](./images/image17.png)
 
-6.  **Enable** continuous integration.
+6.  **Enable** continuous integration, if it is not already enabled.
 
     ![](./images/image18.png)
 
-    \>  We also have the option of adding quality gates to the release process. For example, we could require that a
-    specific user or group approve a release before it continues, or that they approve it after it's been deployed. These gates provide
-    notifications to the necessary groups, as well as polling support if you're automating the gates using something dynamic, such as an
-    Azure function, REST API, work item query, and more. We won't add any of that here, but we could easily come back and do it later on.
+    \>  We also have the option of adding quality gates to the release process. For example, we could require that a specific user or group approve a release before it continues, or that they approve it after it's been deployed. These gates provide notifications to the necessary groups, as well as polling support if you're automating the gates using something dynamic, such as an Azure function, REST API, work item query, and more. We won't add any of that here, but we could easily come back and do it later on.
 
 7.  Click the **pre-deployment conditions** button.
 
@@ -440,7 +420,7 @@ publishing to Azure. But to illustrate how flexible and productive the experienc
 
 28. Select the same subscription as earlier.
 
-    ![]](./images/image38.png)
+    ![](./images/image38.png)
 
 29. Enter the **App Service name** of **"\$(web)"**.
 
@@ -450,8 +430,7 @@ publishing to Azure. But to illustrate how flexible and productive the experienc
 
     ![](./images/image40.png)
 
-Task 4 -- Invoking Continuous Delivery from GitHub to Azure
------------------------------------------------------------
+### Task 4 -- Invoking Continuous Delivery from GitHub to Azure
 
 \>  Now that we have our pipelines in place, it's time to
 commit a change to the master branch on GitHub. We're going to pull down
