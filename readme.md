@@ -547,7 +547,7 @@ creation and commit a slight edit to trigger the CI/CD process.
 # Exercise 2 -- Managing GitHub Projects with Azure DevOps
 
 
- DevOps is not just about automation; while continuous integartion and continuous delivery are key practices, teams also need continuous planning. As the saying software developmement is a team sport - it is vital that everyone stays on the same page. 
+ DevOps is not just about automation; while continuous integartion and continuous delivery are key practices, teams also need continuous planning. As the saying software developmement is a team sport - it is vital that everyone stays on the same page.
 
 Azure Boards provides a wealth of project management functionality that spans Kanban boards, backlogs, team dashboards, and
 custom reporting. By connecting Azure Boards with GitHub repositories, teams can take advantage of the rich project management capabilities. You can create links between GitHub commits and pull requests to work items tracked in Azure Boards. This enables a seamless way for you to use GitHub for software development while using Azure Boards to plan and track your work.
