@@ -480,6 +480,12 @@ creation and commit a slight edit to trigger the CI/CD process.
 
     ![](./images/image43.png)
 
+  1. If you receive an error promting you to configure user .name and user.email in git, open a command prompt and enter the following command to set your user name and email address:
+      ````
+      git config --global user.name "Your Name"
+      git config --global user.name "Your Email Address"
+      ````
+
 10. Press the **Synchronize Changes** button at the bottom of the window
     to push the commit to the server. Confirm if prompted.
 
@@ -536,174 +542,20 @@ creation and commit a slight edit to trigger the CI/CD process.
     ![](./images/image52.png)
     
 =========================
-Task 5 -- Reviewing the Application and Azure Portal
-----------------------------------------------------
 
-\> While the resources finish spinning up, let's take a
-quick tour of the Azure portal. It's thoughtfully designed and easy to
-use. The navigation on the left hand side provides access to major
-platform components, such as app services and virtual machines.
-Solutions are organized as resource groups, which are logical
-collections of the resources used to run your solution. We'll search for
-the solution our release pipeline created earlier.
 
-1.  Switch to the Aure portal tab (<https://portal.azure.com>).
+# Exercise 2 -- Managing GitHub Projects with Azure DevOps
 
-2.  Review the left-hand navigation.
 
-3.  Search for your resource group name and open it.
+ DevOps is not just about automation; while continuous integartion and continuous delivery are key practices, teams also need continuous planning. As the saying software developmement is a team sport - it is vital that everyone stays on the same page. 
 
-    ![](./images/image58.png)
-
-    \> Our solution requires three resources in Azure.
-    The app service is our web site and the app service plan is the
-    virtual server farm the site is deployed to. The Cosmos DB is a
-    globally-distributed, multi-model database service instance we're
-    using to manage all of the data in the site. Let's take a closer
-    look at the app service.
-
-4.  Click the **App Service**. If this isn't available yet, check in on
-    the release pipeline to make sure the Azure Deployment task didn't
-    fail. Otherwise, refresh occassionaly until it is. Keep in mind that
-    the app service will be available before the app itself is deployed,
-    so the actual site itself won't be ready until the pipeline
-    completes.
-
-    ![](./images/image59.png)
-
-    \> This view is the dashboard for the app service
-    and provides convenient access to virtually everything we could ever
-    need to do. One of the most useful features for DevOps professionals
-    is the "diagnose and solve problems" view that offers quick access
-    to a variety of self-diagnostic features. These features include
-    checks for typical issues related to availability, performance, and
-    configuration.
-
-5.  Click **Diagnose and solve problems**.
-
-    ![](./images/image60.png)
-
-6.  Review the options.
-
-    ![](./images/image61.png)
-
-    \> The deployment center provides a single place to
-    track deployment, such as those that are automated via pipeline. You
-    can also use and track deployment slots, which allow you to have
-    additional release targets. For example, you might make it a policy
-    to always deploy to the staging slot so that your team has an
-    opportunity to review and run tests before making it public.
-    Configuring a release pipeline to push to a specific slot is a
-    setting available in deployment tasks.
-
-7.  Click **Deployment Center**.
-
-    ![](./images/image62.png)
-
-8.  Review the deployment.
-
-    ![](./images/image63.png)
-
-    \> The "application settings" view enables you to
-    define system-level settings for the environment, such as versions
-    of .NET or PHP. You can also configure virtual applications and
-    directories, as well as application-level settings, such as
-    connection strings.
-
-9.  Click **Application settings**.
-
-    ![](./images/image64.png)
-
-    \> Application Insights is one of the most valuable
-    services for DevOps teams. It provides performance tracking and
-    management features for every level of an application. We haven't
-    configured it for this project yet, but once it's in place, you can
-    trace an action in a web browser all the way through the web request
-    into an API and down to the resources it's dependent on. If there's
-    an error somewhere along the way, it's really easy to diagnose the
-    cause so that teams spend more time working on improvements than
-    troubleshooting.
-
-10. Click **Application Insights**.
-
-    ![](./images/image65.png)
-
-    \> One of the great benefits of a cloud platform is
-    how easily you can scale a platform up and out. For example, we have
-    the option here to scale our current application up to use a pretty
-    powerful set of virtual hardware. Or, depending on our needs, we can
-    use the scale out option to add more instances as well. There is
-    even an autoscale option to automatically add and remove instances
-    based on load.
-
-11. Click **Scale up**.
-
-    ![](./images/image66.png)
-
-12. Review options.
-
-    ![](./images/image67.png)
-
-    \> In addition to web sites, you can also build and
-    deploy web jobs. These are standalone apps or scripts that can be
-    invoked via web hook. You can also use them in combination with a
-    scheduler to perform regular tasks, such as batch updates to your
-    data store.
-
-13. Click **WebJobs**.
-
-    ![](./images/image68.png)
-    \> There's also a console option for you to explore
-    what's going on in your service. For example, let's get a directory
-    listing of the web root.
-
-14. Click **Console**.
-
-    ![](./images/image69.png)
-
-15. Execute a **"dir"** command.
-
-    ![](./images/image70.png)
-
-    \> There are also plenty of built in monitoring and
-    alerting features. These save you a lot of time so you can focus on
-    developing business value instead. And if you're looking for advice
-    on places to improve the application, there's the App Service
-    Advisor. Things are looking good now, but we'll want to keep an eye
-    on this for future suggestions.
-
-16. Review monitoring options.
-
-    ![](./images/image71.png)
-
-17. Click **App Service Advisor**.
-
-    ![](./images/image72.png)
-
-18. Review insights.
-
-    ![](./images/image73.png)
-
-    \> That was a quick tour of the app service
-    configuration, so let's check out the actual site in the cloud. We
-    just took a project in GitHub and set up a sophisticated, automated
-    deployment to Azure in mere minutes!
-
-19. Click the **URL** to open the site.
-
-    ![](./images/image74.png)
-
-20. Review the site. Keep the browser window open for later.
-
-    ![](./images/image75.png)
-
-============
-
-Task 7 -- Managing GitHub Projects with Azure DevOps
-----------------------------------------------------
-
-\> Azure Boards provides a wealth of project management functionality that spans Kanban boards, backlogs, team dashboards, and
+Azure Boards provides a wealth of project management functionality that spans Kanban boards, backlogs, team dashboards, and
 custom reporting. By connecting Azure Boards with GitHub repositories, teams can take advantage of the rich project management capabilities. You can create links between GitHub commits and pull requests to work items tracked in Azure Boards. This enables a seamless way for you to use GitHub for software development while using Azure Boards to plan and track your work.
+
+
+====================
+
+## Task 1 : Integrating Azure Boards
 
 1.  Return to the Azure DevOps tab.
 
