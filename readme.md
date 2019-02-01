@@ -214,6 +214,7 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
         condition: in(variables['Agent.JobStatus'], 'Succeeded')
         inputs:
           codeCoverageTool: Cobertura
+          summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage/*coverage.xml'
           reportDirectory: '$(System.DefaultWorkingDirectory)/coverage'
 
       - task: ArchiveFiles@2
@@ -230,8 +231,8 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
           TargetFolder: '$(build.artifactstagingdirectory)/Templates'
 
       - task: PublishBuildArtifacts@1
-        displayName: 'Publish Artifact: drop'
-        
+        displayName: 'Publish Artifact: drop'        
+
     ````
 
 5.  Click **Save and run**.
