@@ -57,53 +57,13 @@ The key takeaways of the demo are:
 
 These items are required for this demo.
 
-1.  A GitHub account from <https://github.compool:  
-  vmImage: 'ubuntu-16.04' 
-
-steps:
-  - task: Npm@1
-    inputs:
-      command: 'install'
-    
-  - script:
-      npm test
-    displayName: 'Run tests'
-    continueOnError: true
-
-  - task: PublishTestResults@2
-    displayName: 'Publish Test Results'
-    condition: succeededOrFailed()
-    inputs:
-      testResultsFiles: '$(System.DefaultWorkingDirectory)/test-report.xml'
-
-  - task: PublishCodeCoverageResults@1
-    displayName: 'Publish Code Coverage'
-    condition: in(variables['Agent.JobStatus'], 'Succeeded')
-    inputs:
-      codeCoverageTool: Cobertura
-      reportDirectory: '$(System.DefaultWorkingDirectory)/coverage'
-
-  - task: ArchiveFiles@2
-    displayName: 'Archive sources'
-    inputs:
-      rootFolderOrFile: '$(Build.SourcesDirectory)'
-      includeRootFolder: false
-
-  - task: CopyFiles@2
-    displayName: 'Copy ARM templates'
-    inputs:
-      SourceFolder: deployment
-      Contents: '*.json'
-      TargetFolder: '$(build.artifactstagingdirectory)/Templates'
-
-  - task: PublishBuildArtifacts@1
-    displayName: 'Publish Artifact: drop'.
+1.  A GitHub account from <https://github.com>.
 
 2.  An Azure account from <https://azure.com>.
 
 3.  An Azure DevOps account from <https://dev.azure.com>
 
-**Note:** If you are using your own machine, you will also need  the following:
+> **Note:** If you are using your own machine, you will also need  the following:
 
 4.  ARM Outputs extension installed in your Azure DevOps account from
     <https://marketplace.visualstudio.com/items?itemName=keesschollaart.arm-outputs>.
