@@ -63,7 +63,7 @@ These items are required for this demo.
 
 3.  An Azure DevOps account from <https://dev.azure.com>
 
-**Note:** If you are using your own machine, you will also need  the following:
+> **Note:** If you are using your own machine, you will also need  the following:
 
 4.  ARM Outputs extension installed in your Azure DevOps account from
     <https://marketplace.visualstudio.com/items?itemName=keesschollaart.arm-outputs>.
@@ -159,7 +159,7 @@ extension in the GitHub Marketplace.
 1.  Select the repositories you want to include (or **All
     repositories**) and click **Install**.
     
-    > **Note** that if you've previously installed Azure Pipelines, you may
+    >**Note:** If you've previously installed Azure Pipelines, you may
     need to toggle between the "All" and "Select" radio buttons to enable the 
     wizard in Task 2. You can always create the pipeline directly from Azure
     Pipelines if the wizard does not appear.
@@ -180,8 +180,7 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
 
     ![](./images/image9.png)
    
-
-    >Every build pipeline is simply a set of tasks. Whether it's copying files, compiling source, or publishing artifacts, the existing library of tasks covers the vast majority of scenarios. You can even create your own if you have specialized needs not already covered. We're going to use YAML, a markup syntax that lends itself well to describing the build pipeline. Note that the Node.js pipeline as a starting point based on an analysis of our source project. We'll replace the contents with the final YAML required for our project.
+    Every build pipeline is simply a set of tasks. Whether it's copying files, compiling source, or publishing artifacts, the existing library of tasks covers the vast majority of scenarios. You can even create your own if you have specialized needs not already covered. We're going to use YAML, a markup syntax that lends itself well to describing the build pipeline. Note that the Node.js pipeline as a starting point based on an analysis of our source project. We'll replace the contents with the final YAML required for our project.
 
 3.  Select the recommended template.
 
@@ -190,34 +189,50 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
 4.  Replace the default template with the YAML below.
 
     ````yaml
-
+    
     pool:  
       vmImage: 'ubuntu-16.04' 
 
     steps:
+      - task: Npm@1
+        inputs:
+          command: 'install'
+
+      - script:
+          npm test
+        displayName: 'Run tests'
+        continueOnError: true
+
+      - task: PublishTestResults@2
+        displayName: 'Publish Test Results'
+        condition: succeededOrFailed()
+        inputs:
+          testResultsFiles: '$(System.DefaultWorkingDirectory)/test-report.xml'
+
+      - task: PublishCodeCoverageResults@1
+        displayName: 'Publish Code Coverage'
+        condition: in(variables['Agent.JobStatus'], 'Succeeded')
+        inputs:
+          codeCoverageTool: Cobertura
+          summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage/*coverage.xml'
+          reportDirectory: '$(System.DefaultWorkingDirectory)/coverage'
+
+      - task: ArchiveFiles@2
+        displayName: 'Archive sources'
+        inputs:
+          rootFolderOrFile: '$(Build.SourcesDirectory)'
+          includeRootFolder: false
+
       - task: CopyFiles@2
-        displayName: 'Copy Files to: $(build.artifactstagingdirectory)/Templates'
+        displayName: 'Copy ARM templates'
         inputs:
           SourceFolder: deployment
           Contents: '*.json'
           TargetFolder: '$(build.artifactstagingdirectory)/Templates'
 
-      - task: Npm@1
-        displayName: 'npm custom'
-        inputs:
-          command: custom
-          verbose: false
-          customCommand: 'install --production'
-
-      - task: ArchiveFiles@2
-        displayName: 'Archive $(Build.SourcesDirectory)'
-        inputs:
-          rootFolderOrFile: '$(Build.SourcesDirectory)'
-          includeRootFolder: false
-
       - task: PublishBuildArtifacts@1
-        displayName: 'Publish Artifact: drop'
-        
+        displayName: 'Publish Artifact: drop'        
+
     ````
 
 5.  Click **Save and run**.
@@ -245,7 +260,7 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
 
     ![](./images/image14.png)
 
-    \> The first item to define in a release pipeline is exactly what will be released and when. In our case, it's the output
+    The first item to define in a release pipeline is exactly what will be released and when. In our case, it's the output
     generated from the build pipeline. Note that we could also assign a
     schedule, such as if we wanted to release the latest build every
     night.
@@ -259,7 +274,7 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
 
     ![](./images/image16.png)
 
-    \> As we did with continuous integration starting on a source commit, we also want to have this pipeline automatically start when the build pipeline completes. It's just as easy.
+    As we did with continuous integration starting on a source commit, we also want to have this pipeline automatically start when the build pipeline completes. It's just as easy.
 
 5.  Click the **Triggers** button on the artifact.
 
@@ -269,7 +284,7 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
 
     ![](./images/image18.png)
 
-    \>  We also have the option of adding quality gates to the release process. For example, we could require that a specific user or group approve a release before it continues, or that they approve it after it's been deployed. These gates provide notifications to the necessary groups, as well as polling support if you're automating the gates using something dynamic, such as an Azure function, REST API, work item query, and more. We won't add any of that here, but we could easily come back and do it later on.
+    We also have the option of adding quality gates to the release process. For example, we could require that a specific user or group approve a release before it continues, or that they approve it after it's been deployed. These gates provide notifications to the necessary groups, as well as polling support if you're automating the gates using something dynamic, such as an Azure function, REST API, work item query, and more. We won't add any of that here, but we could easily come back and do it later on.
 
 7.  Click the **pre-deployment conditions** button.
 
@@ -279,7 +294,7 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
 
     ![](./images/image20.png)
 
-    \>  In this pipeline, we're going to need to specify the same resource group in multiple tasks, so it's a good practice
+    In this pipeline, we're going to need to specify the same resource group in multiple tasks, so it's a good practice
     to use a pipeline variable. We'll add one here for the new Azure resource group we want to provision our resources to. Note that
     there are also a variety of deployment options we can configure, as well as a retention policy.
 
@@ -293,7 +308,7 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
 
     ![](./images/image22.png)
 
-    \>  Also, just like the build pipeline, the release pipeline is really just a set of tasks. There are many
+    Also, just like the build pipeline, the release pipeline is really just a set of tasks. There are many
     out-of-the-box tasks available, and you can build your own if needed. The first task our release requires is to set up the Azure
     deployment environment if it doesn't yet exist. After we add the task, I can authorize access to the Azure account I want to deploy
     to and instruct it to use the variable name we just specified for the resource group name.
@@ -324,7 +339,7 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
 
     ![](./images/image28.png)
 
-    \>  Rather than having to manually create the Azure
+    Rather than having to manually create the Azure
     resources required to host the web app, the team has defined an
     Azure Resource Manager---or ARM---template that describes the
     environment in JSON. This allows the environment definition to be
@@ -350,7 +365,7 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
 
     ![](./images/image29.png)
 
-    \>  When this task completes, it will have generated
+    When this task completes, it will have generated
     an Azure resource group with the resources required to run our
     application. However, the ARM template does some processing of the
     variables to generate names for the resources based on the input
@@ -379,7 +394,7 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
 
     ![](./images/image32.png)
 
-    \> Now let's get back to adding the ARM Outputs
+    Now let's get back to adding the ARM Outputs
     task. The key variable we care about here is the name of the app
     service created, which our ARM template has specified as an output.
     This task will populate it for us to use as the "web" variable in
@@ -398,7 +413,7 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
 
     ![](./images/image35.png)
 
-    \> Finally, we can deploy the app service. We'll use
+    Finally, we can deploy the app service. We'll use
     the same subscription as earlier and specify the web variable as the
     name of the app service we want to deploy to. By this time in the
     pipeline, it will have been filled in for us by the ARM Outputs
@@ -432,7 +447,7 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
 
 ### Task 4 -- Invoking Continuous Delivery from GitHub to Azure
 
-\>  Now that we have our pipelines in place, it's time to
+Now that we have our pipelines in place, it's time to
 commit a change to the master branch on GitHub. We're going to pull down
 the azure-pipelines.yml file added by Azure DevOps during the build
 creation and commit a slight edit to trigger the CI/CD process.
@@ -448,7 +463,7 @@ creation and commit a slight edit to trigger the CI/CD process.
 
     ![](./images/image42.png)
 
-    \>  Before we make our change, let's take a quick
+    Before we make our change, let's take a quick
     look at the build tasks. There are four steps required for the
     build. First, deployment templates are copied to a target folder for
     use during the release process. Next, the project is built with NPM.
@@ -469,7 +484,7 @@ creation and commit a slight edit to trigger the CI/CD process.
 
 8.  Press **Ctrl+S** to save the file.
 
-    \>  Now we can commit and push the updated build
+    Now we can commit and push the updated build
     definition to GitHub. This will invoke a continuous integration
     build in Azure DevOps, which will trigger a continuous delivery to
     Azure upon completion.
@@ -491,7 +506,7 @@ creation and commit a slight edit to trigger the CI/CD process.
 
     ![](./images/image44.png)
 
-    \> Back in Azure DevOps, we can see that our build
+    Back in Azure DevOps, we can see that our build
     pipeline has kicked off a new build. We can follow as it executes
     the tasks we defined earlier, and even get a real-time view into
     what's going on at each step. When the build completes, we can
@@ -514,7 +529,7 @@ creation and commit a slight edit to trigger the CI/CD process.
 
     ![](./images/image48.png)
 
-    \> Now that the build has completed, let's check out
+    Now that the build has completed, let's check out
     the release. It was automatically invoked by the successful
     completion of the build pipeline, and we can follow it all the same.
     Since this is the first time we're deploying, Azure will need to
@@ -546,8 +561,7 @@ creation and commit a slight edit to trigger the CI/CD process.
 
 # Exercise 2 -- Managing GitHub Projects with Azure DevOps
 
-
- DevOps is not just about automation; while continuous integartion and continuous delivery are key practices, teams also need continuous planning. As the saying software developmement is a team sport - it is vital that everyone stays on the same page.
+DevOps is not just about automation; while continuous integartion and continuous delivery are key practices, teams also need continuous planning. As the saying software developmement is a team sport - it is vital that everyone stays on the same page.
 
 Azure Boards provides a wealth of project management functionality that spans Kanban boards, backlogs, team dashboards, and
 custom reporting. By connecting Azure Boards with GitHub repositories, teams can take advantage of the rich project management capabilities. You can create links between GitHub commits and pull requests to work items tracked in Azure Boards. This enables a seamless way for you to use GitHub for software development while using Azure Boards to plan and track your work.
@@ -563,17 +577,17 @@ custom reporting. By connecting Azure Boards with GitHub repositories, teams can
 
     ![](./images/image76.png)
 
-    \> In our scenario, users will need to be able to book flights by selecting the cities involved. We will create a new
+    In our scenario, users will need to be able to book flights by selecting the cities involved. We will create a new
     user story to sort the airports listed in the booking form in alphabetical order by city. Ordinarily we would create the user
-    story at a higher level and add tasks to define how the story is to be implemented, but for our demo purposes here we'll leave it as a
-    single work item.
+    story at a higher level and add tasks to define how the story is to be implemented, but for our demo purposes here we'll leave it as
+    a single work item.
 
 3.  Click **New Work Item** and add a user story with the title **"User
     can select airport by city"**. Press **Enter** to create.
 
     ![](./images/image77.png)
 
-    \> In addition to working with work items in a backlog, we have a very flexible Kanban board option. With the
+    In addition to working with work items in a backlog, we have a very flexible Kanban board option. With the
     board, we can edit items on a card in line, or even drag cards  around to change their state and assignment. Let's take ownership of
     the new user story so we can begin work.
 
@@ -591,7 +605,7 @@ custom reporting. By connecting Azure Boards with GitHub repositories, teams can
 
     ![](./images/image80.png)
 
-\> In order to complete our integration, we'll need to wire up a connection between this project and the GitHub repo.
+    In order to complete our integration, we'll need to wire up a connection between this project and the GitHub repo.
 
 7.  Click **Project settings**.
 
@@ -609,7 +623,7 @@ custom reporting. By connecting Azure Boards with GitHub repositories, teams can
 
     ![](./images/image84.png)
 
-    \> Let's take a look at our deployed site to see
+    Let's take a look at our deployed site to see
     what the current booking experience is like. As you can see, the
     airports appear to be sorted by airport code, which isn't the
     behavior we want our users to see.
@@ -642,7 +656,7 @@ Task 8 -- Committing to Complete a Task
 
 1.  Return to **Visual Studio Code**.
 
-    \> We'll start off by creating a new branch for this
+    We'll start off by creating a new branch for this
     task. The work itself is pretty straightforward. We just need to
     locate the place where airports are provided to the user experience
     and make sure they're being sorted by city name.
@@ -685,7 +699,7 @@ Task 8 -- Committing to Complete a Task
 
 7.  Press **Ctrl+S** to save the file.
 
-    \> We'll skip testing this locally for the sake of
+    We'll skip testing this locally for the sake of
     the demo. Instead, we'll commit it using a comment that includes
     special syntax to link it to the Azure Boards task we saw earlier.
     Now this commit will become trackable from project management, as
@@ -706,7 +720,7 @@ Task 8 -- Committing to Complete a Task
 
 10. When the push has completed, return to the GitHub browser tab.
 
-    \> With the commit pushed, we'll create a pull
+    With the commit pushed, we'll create a pull
     request to drive those changes back into the master branch. In this
     case we're inheriting the title from the commit, but having the pull
     request mention "Fixes AB\#ID" will link and complete the target
@@ -732,7 +746,7 @@ Task 8 -- Committing to Complete a Task
 
 14. Return to Visual Studio Code.
 
-    \> Now we'll switch to the other side of the pull
+    Now we'll switch to the other side of the pull
     request and take on the role of reviewer. We can use Visual Studio
     Code to check out the pull request, analyze changes, and comment.
     Assuming we trust the fix, we can merge the pull request to update
@@ -764,7 +778,7 @@ Task 8 -- Committing to Complete a Task
     ![](./images/image103.png)
    
 
-    \> Once the deployment works its way through build
+    Once the deployment works its way through build
     and release, we can confirm the new functionality.
 
 20. Follow the CI/CD pipeline through to completion.
@@ -778,7 +792,7 @@ Task 8 -- Committing to Complete a Task
 
 22. Return to the Azure DevOps tab open to the Kanban board.
 
-    \> Since the user story we were working on was
+    Since the user story we were working on was
     linked in a pull request that was approved, Azure DevOps will
     automatically transition the state of the work item to "Closed". You
     can also see that the related GitHub commits and pull request were
