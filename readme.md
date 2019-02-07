@@ -78,16 +78,26 @@ These items are required for this demo.
 8.  GitHub Pull Requests extension for Visual Studio Code installed from
     <https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github>.
 
+
 ## Demo Setup
+
 You will need to perform these steps prior to presenting this demo.
 
-1.  Clone the GitHub repo locally and open it in Visual Studio Code.
+1. Login to the virtual machine 
 
-1.  Create a new Azure DevOps project, preferably named something like
-    "ContosoAir".
+1. Open Edge and go to [https://github.com/Microsoft/ContosoAir/](https://github.com/Microsoft/ContosoAir/). 
 
-1.  Have two separate browser tabs open and logged in: one on the GitHub
-    project root and one on the Azure portal.
+1. We will fork this repo. Select **Fork** and select your account. You will be prompted to enter your credentials and enter the authentication code if you have 2FA enabled for your account
+
+1. Once the repo is forked, clone the GitHub repo locally and open it in Visual Studio Code.
+
+1. Login to your Azure portal using the credentials provided in the **resources** tab
+
+1. Open a new tab and navigate to [https://dev.azure.com](https://dev.azure.com) and select **Start for free**
+
+1. Enter the same credentials you entered to login to Azure.
+
+1. Create a new Azure DevOps project, preferably named something like  "ContosoAir".
 
 ============
 
@@ -119,9 +129,6 @@ extension in the GitHub Marketplace.
 
 ### Task 1 -- Installing Azure Pipelines
 
-
-1. Fork the GitHub project at
-    [https://github.com/Microsoft/ContosoAir/](https://github.com/Microsoft/ContosoAir/). 
 
 1. Switch to the browser tab open to the root of your GitHub fork. It
     should be something like **<https://github.com/{youraccount}/ContosoAir>**
