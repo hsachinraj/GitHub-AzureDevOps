@@ -82,21 +82,21 @@ These items are required for this demo.
 
 You will need to perform these steps prior to presenting this demo/lab.
 
-1. Login to the virtual machine.
+- [] Login to the virtual machine.
 
-1. Open Edge and go to [https://github.com/Microsoft/ContosoAir/](https://github.com/Microsoft/ContosoAir/). 
+- [] Open Edge and go to [https://github.com/Microsoft/ContosoAir/](https://github.com/Microsoft/ContosoAir/). 
 
-1. We will fork this repo. Select **Fork** and select your account. You will be prompted to enter your credentials and enter the authentication code if you have 2FA enabled for your account
+- [] We will fork this repo. Select **Fork** and select your account. You will be prompted to enter your credentials and enter the authentication code if you have 2FA enabled for your account
 
-1. Once the repo is forked, clone the GitHub repo locally and open it in Visual Studio Code.
+- [] Once the repo is forked, clone the GitHub repo locally and open it in Visual Studio Code.
 
-      1. Start Visual Studio Code. Press **Ctrl+Shift+P** to bring the Command Palette and enter **Git: Clone** to clone the Git repository. 
+    1. Start Visual Studio Code. Press **Ctrl+Shift+P** to bring the Command Palette and enter **Git: Clone** to clone the Git repository. 
       
       1.  You will be asked for the URL of the remote repository (this will be the URL to your forked repository which should be something like https://github.com/{youraccount}/ContosoAir) and the parent directory under which to put the local repository
 
-1. Login to your Azure portal using the credentials provided in the resources window.
+- [] Login to your Azure portal using the credentials provided in the resources window.
 
-1. Open a new tab and navigate to [https://dev.azure.com](https://dev.azure.com)  to create a new Azure DevOps org/account. 
+- [] Open a new tab and navigate to [https://dev.azure.com](https://dev.azure.com)  to create a new Azure DevOps org/account. 
 
     1. Select **Start for free**. Enter the same credentials you entered to login to Azure.
 
@@ -277,7 +277,7 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
     schedule, such as if we wanted to release the latest build every
     night.
 
-3.  Select the associated artifact. If the build artifact is not already associated, click **Add an artifact** instead.
+3.  Select the associated artifact. 
 
     ![](./images/image15-1.png)
 
@@ -314,7 +314,7 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
 
     ![](./images/image21.png)
 
-10. **Add** a **resourcegroup** variable that is not currently used by
+10. **Add** a ++resourcegroup++ variable that is not currently used by
     an existing resource group in your Azure account (**"contosoair"**
     will be used in this script).
 
@@ -510,10 +510,12 @@ creation and commit a slight edit to trigger the CI/CD process.
     ![](./images/image43.png)
 
   1. If you receive an error promting you to configure user .name and user.email in git, open a command prompt and enter the following command to set your user name and email address:
-      ````
-      git config --global user.name "Your Name"
-      git config --global user.name "Your Email Address"
-      ````
+      
+      > +++git config --global user.name "Your Name" +++
+
+      > +++git config --global user.email "Your Email Address" +++
+
+  > [!note] You may be prompted to sign in to github if you have not already signed in
 
 10. Press the **Synchronize Changes** button at the bottom of the window
     to push the commit to the server. Confirm if prompted.
