@@ -52,8 +52,7 @@ The key takeaways of the demo are:
 
 =============
 
-## Prerequisites
-
+## Prerequisites:
 
 These items are required for this demo.
 
@@ -83,21 +82,29 @@ These items are required for this demo.
 
 You will need to perform these steps prior to presenting this demo.
 
-1. Login to the virtual machine 
+\[\] 1. Login to the virtual machine.
 
-1. Open Edge and go to [https://github.com/Microsoft/ContosoAir/](https://github.com/Microsoft/ContosoAir/). 
+\[\] 1. Open Edge and go to [https://github.com/Microsoft/ContosoAir/](https://github.com/Microsoft/ContosoAir/). 
 
-1. We will fork this repo. Select **Fork** and select your account. You will be prompted to enter your credentials and enter the authentication code if you have 2FA enabled for your account
+\[\] 1. We will fork this repo. Select **Fork** and select your account. You will be prompted to enter your credentials and enter the authentication code if you have 2FA enabled for your account
 
-1. Once the repo is forked, clone the GitHub repo locally and open it in Visual Studio Code.
+\[\] 1. Once the repo is forked, clone the GitHub repo locally and open it in Visual Studio Code.
 
-1. Login to your Azure portal using the credentials provided in the **resources** tab
+      \[\] 1. Start Visual Studio Code. Press **Ctrl+Shift+P** to bring the Command Palette and enter **Git: Clone** to clone the Git repository. 
+      
+      \[\] 1.  You will be asked for the URL of the remote repository (this will be the URL to your forked repository which should be something like https://github.com/{youraccount}/ContosoAir) and the parent directory under which to put the local repository
 
-1. Open a new tab and navigate to [https://dev.azure.com](https://dev.azure.com) and select **Start for free**
+\[\] 1. Login to your Azure portal using the credentials below: 
+    **Email or Phone:** lab.CloudPortalCredential(0).Username
+    **Password:** **Email or Phone:** lab.CloudPortalCredential(0).Password
 
-1. Enter the same credentials you entered to login to Azure.
+\[\] 1. Open a new tab and navigate to [https://dev.azure.com](https://dev.azure.com) and select **Start for free** to create a new Azure DevOps org/account. 
 
-1. Create a new Azure DevOps project, preferably named something like  "ContosoAir".
+\[\] 1. Enter the same credentials you entered to login to Azure.
+
+1. Create a new Azure DevOps project, preferably named something like **"ContosoAir"**.
+
+     > [!note] You will need create a new one so that we can deploy it to the subscription provisioned for the lab. If you want to use your existing Azure DevOps account, you should deploy it to your own subscription.
 
 ============
 
