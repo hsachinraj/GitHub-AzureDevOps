@@ -90,13 +90,13 @@ You will need to perform these steps prior to presenting this demo/lab.
 
 Once the repo is forked, clone the GitHub repo locally and open it in Visual Studio Code.
 
-    - [] Start Visual Studio Code. Press **Ctrl+Shift+P** to bring the Command Palette and enter **Git: Clone** to clone the Git repository. 
+  - [] Start Visual Studio Code. Press **Ctrl+Shift+P** to bring the Command Palette and enter **Git: Clone** to clone the Git repository. 
       
-      - []  You will be asked for the URL of the remote repository (this will be the URL to your forked repository which should be something like https://github.com/{youraccount}/ContosoAir) and the parent directory under which to put the local repository
+  - []  You will be asked for the URL of the remote repository (this will be the URL to your forked repository which should be something like https://github.com/{youraccount}/ContosoAir) and the parent directory under which to put the local repository
 
-- [] Login to your Azure portal, if you do not want to deploy to your subscription, you can use the Azure Pass provided for this technical workshop. See the **resources** tab for your Azure pass code.
+- [] Login to your Azure portal, 
 
-If you are using the Azure pass to create a subscription, it is recommended that you create a new Azure DevOps account
+  >[!note]if you do not want to deploy to your subscription, you can use the Azure Pass provided for this technical workshop. See the **resources** tab for your Azure pass code.If you are using the Azure pass to create a subscription, it is recommended that you create a new Azure DevOps account
      - [] Open a new tab and navigate to [https://dev.azure.com](https://dev.azure.com)  to create a new Azure DevOps org/account. 
 
     - [] Select **Start for free**. Enter the same credentials you entered to login to Azure.
@@ -510,9 +510,9 @@ creation and commit a slight edit to trigger the CI/CD process.
 
   1. If you receive an error promting you to configure user .name and user.email in git, open a command prompt and enter the following command to set your user name and email address:
       
-      > ++ git config --global user.name "Your Name" ++
+      > ++git config --global user.name "Your Name"++
 
-      > ++ git config --global user.email "Your Email Address" ++
+      > ++git config --global user.email "Your Email Address"++
 
   > [!note] You may be prompted to sign in to github if you have not already signed in
 
