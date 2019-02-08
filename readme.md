@@ -88,21 +88,20 @@ You will need to perform these steps prior to presenting this demo/lab.
 
 - [] We will fork this repo. Select **Fork** and select your account. You will be prompted to enter your credentials and enter the authentication code if you have 2FA enabled for your account
 
-- [] Once the repo is forked, clone the GitHub repo locally and open it in Visual Studio Code.
+Once the repo is forked, clone the GitHub repo locally and open it in Visual Studio Code.
 
-    1. Start Visual Studio Code. Press **Ctrl+Shift+P** to bring the Command Palette and enter **Git: Clone** to clone the Git repository. 
+    - [] Start Visual Studio Code. Press **Ctrl+Shift+P** to bring the Command Palette and enter **Git: Clone** to clone the Git repository. 
       
-      1.  You will be asked for the URL of the remote repository (this will be the URL to your forked repository which should be something like https://github.com/{youraccount}/ContosoAir) and the parent directory under which to put the local repository
+      - []  You will be asked for the URL of the remote repository (this will be the URL to your forked repository which should be something like https://github.com/{youraccount}/ContosoAir) and the parent directory under which to put the local repository
 
-- [] Login to your Azure portal using the credentials provided in the resources window.
+- [] Login to your Azure portal, if you do not want to deploy to your subscription, you can use the Azure Pass provided for this technical workshop. See the **resources** tab for your Azure pass code.
 
-- [] Open a new tab and navigate to [https://dev.azure.com](https://dev.azure.com)  to create a new Azure DevOps org/account. 
+If you are using the Azure pass to create a subscription, it is recommended that you create a new Azure DevOps account
+     - [] Open a new tab and navigate to [https://dev.azure.com](https://dev.azure.com)  to create a new Azure DevOps org/account. 
 
-    1. Select **Start for free**. Enter the same credentials you entered to login to Azure.
+    - [] Select **Start for free**. Enter the same credentials you entered to login to Azure.
 
-    1. Create a new Azure DevOps project, preferably named something like **"ContosoAir"**.
-
-     > [!note] You will need create a new one so that we can deploy it to the subscription provisioned for the lab. If you want to use your existing Azure DevOps account, you should deploy it to your own subscription.
+    - [] Create a new Azure DevOps project, preferably named something like **"ContosoAir"*
 
 ============
 
@@ -314,7 +313,7 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
 
     ![](./images/image21.png)
 
-10. **Add** a ++resourcegroup++ variable that is not currently used by
+10. **Add** a ++ resourcegroup ++ variable that is not currently used by
     an existing resource group in your Azure account (**"contosoair"**
     will be used in this script).
 
@@ -371,7 +370,7 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
     You will also need to set **Override template parameters** to
     generate an Azure app service name that is globally unique, so your
     name is recommended. For example, if your name is **John Doe**, use
-    something like **"-p\_environment johndoe"**. This will be used as
+    something like ++**"-p\_environment johndoe"**++. This will be used as
     part of the app service name in Azure, so please limit it to
     supported characters.
 
@@ -511,9 +510,9 @@ creation and commit a slight edit to trigger the CI/CD process.
 
   1. If you receive an error promting you to configure user .name and user.email in git, open a command prompt and enter the following command to set your user name and email address:
       
-      > +++git config --global user.name "Your Name" +++
+      > ++ git config --global user.name "Your Name" ++
 
-      > +++git config --global user.email "Your Email Address" +++
+      > ++ git config --global user.email "Your Email Address" ++
 
   > [!note] You may be prompted to sign in to github if you have not already signed in
 
