@@ -96,29 +96,27 @@ Once the repo is forked, clone the GitHub repo locally and open it in Visual Stu
 
 - [] Login to your Azure portal, 
 
-  >[!note]if you do not want to deploy to your subscription, you can use the Azure Pass provided for this technical workshop. See the **resources** tab for your Azure pass code.If you are using the Azure pass to create a subscription, it is recommended that you create a new Azure DevOps account
-     - [] Open a new tab and navigate to [https://dev.azure.com](https://dev.azure.com)  to create a new Azure DevOps org/account. 
+**Azure Subscription**
+  
+if you do not want to deploy to your subscription, you can use the Azure Pass provided for this technical workshop. See the **resources** tab for your Azure pass code.If you are using the Azure pass to create a subscription, it is recommended that you create a new Azure DevOps account
 
-    - [] Select **Start for free**. Enter the same credentials you entered to login to Azure.
+- [] Open a new tab and navigate to [https://dev.azure.com](https://dev.azure.com)  to create a new Azure DevOps org/account. 
 
-    - [] Create a new Azure DevOps project, preferably named something like **"ContosoAir"*
+- [] Select **Start for free**. Enter the same credentials you entered to login to Azure.
+
+- [] Create a new Azure DevOps project, preferably named something like **"ContosoAir"*
 
 ============
 
 ## Demo Scenario
 
-In this demo, we'll be illustrating the integration and automation
-benefits of Azure DevOps. We will take on the role of helping a
-fictitious airline---Contoso Air---that has developed their flagship web
-site using Node.js. To improve their operations, they want to implement
-pipelines for continuous integration and continuous delivery so that
-they can quickly update their public services and take advantage of the
+In this demo, we'll be illustrating the integration and automation benefits of Azure DevOps. We will take on the role of helping a
+fictitious airline---Contoso Air---that has developed their flagship web site using Node.js. To improve their operations, they want to implement
+pipelines for continuous integration and continuous delivery so that they can quickly update their public services and take advantage of the
 full benefits of DevOps and the cloud.
 
-The site will be hosted in Azure, and they want to automate the entire
-process so that they can spin up all the infrastructure needed to deploy
-and host the application without any manual intervention. Once this
-process is in place, it will free up their technology teams to focus
+The site will be hosted in Azure, and they want to automate the entire process so that they can spin up all the infrastructure needed to deploy
+and host the application without any manual intervention. Once this process is in place, it will free up their technology teams to focus
 more on generating business value.
 
 ## Exercise 1: Setting up automated CI/CD pipelines with Azure Pipelines
@@ -131,7 +129,7 @@ extension in the GitHub Marketplace.
 
 ============
 
-### Task 1 -- Installing Azure Pipelines
+## Task 1 -- Installing Azure Pipelines
 
 
 1. Switch to the browser tab open to the root of your GitHub fork. It
@@ -179,7 +177,7 @@ extension in the GitHub Marketplace.
 
 ===============
 
-### Task 2 -- Configuring an Azure Continuous Integration Pipeline
+## Task 2 -- Configuring an Azure Continuous Integration Pipeline
 
 Now that Azure Pipelines has been installed in the GitHub account, we can configure Azure DevOps to use it. You may select an existing or create a new Azure DevOps project  to hold and run the pipelines we need for continuous integration and continuous delivery. The first thing we'll do is to create the build pipeline.
 
@@ -200,49 +198,35 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
 4.  Replace the default template with the YAML below.
 
     ````yaml-notab
-    
+  trigger: 
+    - master
+
     pool:  
       vmImage: 'ubuntu-16.04' 
 
     steps:
-      - task: Npm@1
+    - task: CopyFiles@2
+        displayName: 'Copy Files to: $(build.artifactstagingdirectory)/Templates'
         inputs:
-          command: 'install'
+        SourceFolder: deployment
+        Contents: '*.json'
+        TargetFolder: '$(build.artifactstagingdirectory)/Templates'
 
-      - script:
-          npm test
-        displayName: 'Run tests'
-        continueOnError: true
-
-      - task: PublishTestResults@2
-        displayName: 'Publish Test Results'
-        condition: succeededOrFailed()
+    - task: Npm@1
+        displayName: 'npm custom'
         inputs:
-          testResultsFiles: '$(System.DefaultWorkingDirectory)/test-report.xml'
+            command: custom
+            verbose: false
+            customCommand: 'install --production'
 
-      - task: PublishCodeCoverageResults@1
-        displayName: 'Publish Code Coverage'
-        condition: in(variables['Agent.JobStatus'], 'Succeeded')
+    - task: ArchiveFiles@2
+        displayName: 'Archive $(Build.SourcesDirectory)'
         inputs:
-          codeCoverageTool: Cobertura
-          summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage/*coverage.xml'
-          reportDirectory: '$(System.DefaultWorkingDirectory)/coverage'
+            rootFolderOrFile: '$(Build.SourcesDirectory)'
+            includeRootFolder: false
 
-      - task: ArchiveFiles@2
-        displayName: 'Archive sources'
-        inputs:
-          rootFolderOrFile: '$(Build.SourcesDirectory)'
-          includeRootFolder: false
-
-      - task: CopyFiles@2
-        displayName: 'Copy ARM templates'
-        inputs:
-          SourceFolder: deployment
-          Contents: '*.json'
-          TargetFolder: '$(build.artifactstagingdirectory)/Templates'
-
-      - task: PublishBuildArtifacts@1
-        displayName: 'Publish Artifact: drop'        
+    - task: PublishBuildArtifacts@1
+        displayName: 'Publish Artifact: drop'
 
     ````
 
@@ -258,8 +242,186 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
 7.  Follow the build through to completion.
 
 ====================
+## Task 4 -- Invoking Continuous Delivery from GitHub to Azure
 
-### Task 3 -- Configuring an Azure Continuous Delivery Pipeline
+Now that we have our pipelines in place, it's time to commit a change to the master branch on GitHub. We're going to pull down
+the azure-pipelines.yml file added by Azure DevOps during the build creation and commit a slight edit to trigger the CI/CD process.
+
+1.  Open the ContosoAir project in Visual Studio Code.
+
+1.  From the **Source Control** tab, select **Sync** from the **More Actions** dropdown.
+
+    ![](./images/image41.png)
+
+1.  From the **Explorer** tab, open **azure-pipelines.yml**.
+
+    ![](./images/image42.png)
+
+    Before we make our change, let's take a quick look at the build tasks. There are four steps required for the
+    build. First, deployment templates are copied to a target folder for use during the release process. Next, the project is built with NPM.
+    After that, the built solution is archived and finally published for the release pipeline to access. With the Azure Pipelines extension
+    for Visual Studio Code, you get a great YAML editing experience, including support for IntelliSense.
+
+    What we are missing is testing in the pipeline. We already have unit tests for our code. We just have to run them in the pipeline. We will add tasks to run the test and publish the results and code coverage. 
+
+1. We will remove all the steps (do not remove the trigger and pool sections) and replace it with the following:
+
+    ````yaml
+   steps:
+  - task: Npm@1
+    inputs:
+      command: 'install'
+  - script:
+      npm test
+    displayName: 'Run unit tests'
+    continueOnError: true
+
+  - task: PublishTestResults@2
+    displayName: 'Publish Test Results'
+    condition: succeededOrFailed()
+    inputs:
+      testResultsFiles: '$(System.DefaultWorkingDirectory)/test-report.xml'
+
+  - task: PublishCodeCoverageResults@1
+    displayName: 'Publish Code Coverage'
+    condition: in(variables['Agent.JobStatus'], 'Succeeded')
+    inputs:
+      codeCoverageTool: Cobertura
+      summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage/*coverage.xml'
+      reportDirectory: '$(System.DefaultWorkingDirectory)/coverage'
+
+  - task: ArchiveFiles@2
+    displayName: 'Archive sources'
+    inputs:
+      rootFolderOrFile: '$(Build.SourcesDirectory)'
+      includeRootFolder: false
+
+  - task: CopyFiles@2
+    displayName: 'Copy ARM templates'
+    inputs:
+      SourceFolder: deployment
+      Contents: '*.json'
+      TargetFolder: '$(build.artifactstagingdirectory)/Templates'
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop' 
+
+    ````
+
+
+1.  Press **Ctrl+S** to save the file.
+
+    Now we can commit and push the updated build definition to GitHub. This will invoke a continuous integration
+    build in Azure DevOps, which will trigger a continuous delivery to Azure upon comspletion.
+
+9.  From the **Source Control** tab, enter a commit message like **Updated build pipeline** and press **Ctrl+Enter** to commit.
+    Confirm if prompted.
+
+    ![](./images/image43.png)
+
+  1. If you receive an error promting you to configure user .name and user.email in git, open a command prompt and enter the following command to set your user name and email address:
+      
+      > ++git config --global user.name "Your Name"++
+
+      > ++git config --global user.email "Your Email Address"++
+
+  > [!note] You may be prompted to sign in to github if you have not already signed in
+
+10. Press the **Synchronize Changes** button at the bottom of the window to push the commit to the server. Confirm if prompted.
+
+    ![](./images/image44.png)
+
+    Back in Azure DevOps, we can see that our build pipeline has kicked off a new build. We can follow as it executes
+    the tasks we defined earlier, and even get a real-time view into what's going on at each step. When the build completes, we can
+    review the logs and any tests that were performed as part of the process.
+
+11. Return to Azure DevOps and navigate to the **Builds** hub.
+
+    ![](./images/image45.png)
+
+12. Click the new build.
+
+    ![](./images/image46.png)
+
+13. Track the build tasks.
+
+    ![](./images/image47.png)
+
+14. Follow the build through to completion.
+
+    ![](./images/image48.png)
+
+    Now that the build has completed, let's check out
+    the release. It was automatically invoked by the successful
+    completion of the build pipeline, and we can follow it all the same.
+    Since this is the first time we're deploying, Azure will need to
+    provision the resources. That can take a minute, so let's check back
+    in later.
+
+15. Navigate to the **Releases** hub.
+
+    ![](./images/image49.png)
+
+16. Select the new release. If one is not immediately available, click
+    the **Refresh** option.
+
+    ![](./images/image50.png)
+
+17. Click **In progress** to follow the release process.
+
+    ![](./images/image51.png)
+
+18. Note that it will take a few minutes (around 5 at the time of
+    drafting) for the app to finish deploying due to heavy first-time
+    operations. Move ahead to the next step while it works in the
+    backgroud.
+
+    ![](./images/image52.png)
+
+=============================
+
+## Task 5: Adding a build status badge ###
+
+1. An important sign for a quality project is its build status badge. When someone finds a project that has a badge indicating that the project is currently in a successful build state, it's a sign that the project is maintained effectively. Return to the **Azure DevOps** tab.
+
+1. Click the build pipeline to navigate to its overview page.
+
+
+1. From the **ellipses** dropdown, select **Status badge**.
+
+
+
+1. The **Status badge** UI provides a quick and easy way to integrate the build status wherever you want. Often, you'll want to use the provided URLs in your own dashboards, or you can use the Markdown snippet to add the status badge to locations such as Wiki pages. Click the **Copy to clipboard** button for **Sample Markdown**.
+
+
+
+1. Return to the **GitHub** tab.
+
+1. Select the **Code** tab.
+
+
+
+1. Open **README.md**.
+
+
+
+1. Click the **Edit** button.
+
+
+
+1. Paste in the clipboard contents around line **5**.
+
+
+
+1. Scroll down and add a commit comment and click **Commit changes**.
+
+
+
+
+
+==============================
+
+## Task 6 -- Configuring an Azure Continuous Delivery Pipeline
 
  Now that the build pipeline has been created and the first build has completed, we can turn our attention to creating a release pipeline. Like the build templates, there are many packaged options available that cover common deployment scenarios, such as publishing to Azure. But to illustrate how flexible and productive the experience is, we will build this pipeline from an empty template.
 
@@ -456,123 +618,7 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
 
     ![](./images/image40.png)
 
-=========
-
-### Task 4 -- Invoking Continuous Delivery from GitHub to Azure
-
-Now that we have our pipelines in place, it's time to
-commit a change to the master branch on GitHub. We're going to pull down
-the azure-pipelines.yml file added by Azure DevOps during the build
-creation and commit a slight edit to trigger the CI/CD process.
-
-1.  Open the ContosoAir project in Visual Studio Code.
-
-2.  From the **Source Control** tab, select **Sync** from the **More
-    Actions** dropdown.
-
-    ![](./images/image41.png)
-
-3.  From the **Explorer** tab, open **azure-pipelines.yml**.
-
-    ![](./images/image42.png)
-
-    Before we make our change, let's take a quick
-    look at the build tasks. There are four steps required for the
-    build. First, deployment templates are copied to a target folder for
-    use during the release process. Next, the project is built with NPM.
-    After that, the built solution is archived and finally published for
-    the release pipeline to access. With the Azure Pipelines extension
-    for Visual Studio Code, you get a great YAML editing experience,
-    including support for IntelliSense.
-
-4.  Examine the tasks within the pipeline definition.
-
-5.  Make a change to show IntelliSense offered by the extension.
-
-6.  Undo any changes to avoid breaking the definition.
-
-7.  Add a newline to the end of the file. The purpose is simply to
-    produce a change to the file you can commit, but without impacting
-    the working build.
-
-8.  Press **Ctrl+S** to save the file.
-
-    Now we can commit and push the updated build
-    definition to GitHub. This will invoke a continuous integration
-    build in Azure DevOps, which will trigger a continuous delivery to
-    Azure upon completion.
-
-9.  From the **Source Control** tab, enter a commit message like
-    **"Updated build pipeline"** and press **Ctrl+Enter** to commit.
-    Confirm if prompted.
-
-    ![](./images/image43.png)
-
-  1. If you receive an error promting you to configure user .name and user.email in git, open a command prompt and enter the following command to set your user name and email address:
-      
-      > ++git config --global user.name "Your Name"++
-
-      > ++git config --global user.email "Your Email Address"++
-
-  > [!note] You may be prompted to sign in to github if you have not already signed in
-
-10. Press the **Synchronize Changes** button at the bottom of the window
-    to push the commit to the server. Confirm if prompted.
-
-    ![](./images/image44.png)
-
-    Back in Azure DevOps, we can see that our build
-    pipeline has kicked off a new build. We can follow as it executes
-    the tasks we defined earlier, and even get a real-time view into
-    what's going on at each step. When the build completes, we can
-    review the logs and any tests that were performed as part of the
-    process.
-
-11. Return to Azure DevOps and navigate to the **Builds** hub.
-
-    ![](./images/image45.png)
-
-12. Click the new build.
-
-    ![](./images/image46.png)
-
-13. Track the build tasks.
-
-    ![](./images/image47.png)
-
-14. Follow the build through to completion.
-
-    ![](./images/image48.png)
-
-    Now that the build has completed, let's check out
-    the release. It was automatically invoked by the successful
-    completion of the build pipeline, and we can follow it all the same.
-    Since this is the first time we're deploying, Azure will need to
-    provision the resources. That can take a minute, so let's check back
-    in later.
-
-15. Navigate to the **Releases** hub.
-
-    ![](./images/image49.png)
-
-16. Select the new release. If one is not immediately available, click
-    the **Refresh** option.
-
-    ![](./images/image50.png)
-
-17. Click **In progress** to follow the release process.
-
-    ![](./images/image51.png)
-
-18. Note that it will take a few minutes (around 5 at the time of
-    drafting) for the app to finish deploying due to heavy first-time
-    operations. Move ahead to the next step while it works in the
-    backgroud.
-
-    ![](./images/image52.png)
-    
-=========================
-
+=============
 
 # Exercise 2 -- Managing GitHub Projects with Azure DevOps
 
