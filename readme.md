@@ -604,12 +604,21 @@ Now that we have our CI successfully built, it's time to deploy but how do we kn
 1. Select **Create** to start a new release. 
 
 1. Click **In progress** to follow the release process.
+
     ![](./images/image51.png)
 
 1. Note that it will take a few minutes (around 5 at the time of  drafting) for the app to finish deploying due to heavy first-time operations. Move ahead to the next step while it works in the backgroud.
 
     ![](./images/image52.png)
 
+1. Select the **App Service Deploy** task to view the detailed log. You should find the URL to the published website here. Ctrl+Click the link to open it in a separate tab.
+
+    ![](./images/image-release2.png)
+
+1. This should open the web page of the Conotoso Air:
+
+    ![](./images/image-contoso.png)
+    
 =============
 
 # Exercise 2 -- Managing GitHub Projects with Azure DevOps
