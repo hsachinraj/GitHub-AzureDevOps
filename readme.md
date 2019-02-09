@@ -4,10 +4,7 @@ GitHub hosts over 25 million repositories containing applications of all
 shapes and sizes. But GitHub is just a start---those applications still
 need to get built, released, and managed to reach their full potential.
 
-With the introduction of [Azure DevOps](https://azure.com/devops),
-Microsoft offers developers a new continuous integration/continuous
-delivery (CI/CD) service called [Azure
-Pipelines](https://azure.microsoft.com/services/devops/pipelines/) that
+[Azure Pipelines](https://azure.microsoft.com/services/devops/pipelines/) that
 enables you to continuously build, test, and deploy to any platform or
 cloud. It has cloud-hosted agents for Linux, macOS, and Windows;
 powerful workflows with native container support; and flexible
@@ -98,9 +95,11 @@ Once the repo is forked, clone the GitHub repo locally and open it in Visual Stu
   
   - [] Choose the directory under which to put the local repository
 
+  - [] Choose **Open Repository** when prompted
+
 **Azure Subscription**
-  
-if you do not want to deploy to your subscription, you can use the Azure Pass provided for this technical workshop. See the **resources** tab for your Azure pass code.If you are using the Azure pass to create a subscription, it is recommended that you create a new Azure DevOps account
+
+We will be publishing a node-based web app that has a Cosmos DB (Mongo DB)  backend. You will need an Azure subscription. If you do not want to deploy to your subscription, you can use the Azure Pass provided for this technical workshop. See the **resources** tab for your Azure pass code. You will need to go to [https://www.microsoftazurepass.com](https://www.microsoftazurepass.com/) and redeem that code against any MSA. Then you would use the MSA to log into the Azure Portal. 
 
 - [] Open a new tab and navigate to [https://dev.azure.com](https://dev.azure.com)  to create a new Azure DevOps org/account. 
 
@@ -129,14 +128,14 @@ repo invoke a continuous integration build in Azure DevOps. Once that build is c
 extension in the GitHub Marketplace.
 
 ============
-# Task 1 -- Installing Azure Pipelines
+# Task 1: Installing Azure Pipelines from GitHub Marketplace
 
+Azure Pipelines is available in GitHub Marketplace which makes it even more easy for teams to configure a CI/CD pipeline for any Azure application using your preferred language and framework as part of your GitHub workflow in just a few simple steps
 
-1. Switch to the browser tab open to the root of your GitHub fork. It
-    should be something like **<https://github.com/{youraccount}/ContosoAir>**
+1. Switch to the browser tab open to the root of your GitHub fork. 
 
     
-1.  Navigate to the [**GitHub Marketplace**](https://github.com/marketplace).
+1.  Navigate to the **GitHub Marketplace**
 
     ![](./images/image1.png)
    
@@ -176,78 +175,82 @@ extension in the GitHub Marketplace.
     ![](./images/image7.png)
 
 ===============
-# Task 2 -- Configuring an Azure Continuous Integration Pipeline
+# Task 2: Configuring an Continuous Integration Pipeline
 
-Now that Azure Pipelines has been installed in the GitHub account, we can configure Azure DevOps to use it. You may select an existing or create a new Azure DevOps project  to hold and run the pipelines we need for continuous integration and continuous delivery. The first thing we'll do is to create the build pipeline.
+Now that Azure Pipelines has been installed and configured, we can start building the pipelines but we will need to select a project where the pipeline will be saved. You may select an existing or create a new Azure DevOps project  to hold and run the pipelines we need for continuous integration and continuous delivery. The first thing we'll do is to create a CI pipeline.
 
 1.  Select the organization and Azure DevOps project that you want to use. If you do not have one, you can create for free.
 
     ![](./images/image8.png)
 
-2.  Select the forked repo.
+1.  Select the forked repo.
 
     ![](./images/image9.png)
    
     Every build pipeline is simply a set of tasks. Whether it's copying files, compiling source, or publishing artifacts, the existing library of tasks covers the vast majority of scenarios. You can even create your own if you have specialized needs not already covered. We're going to use YAML, a markup syntax that lends itself well to describing the build pipeline. Note that the Node.js pipeline as a starting point based on an analysis of our source project. We'll replace the contents with the final YAML required for our project.
 
-3.  Select the recommended template.
+1.  Select the recommended template.
 
     ![](./images/image10.png)
 
-4.  Replace the default template with the YAML below.
+1.  Replace the default template with the YAML below. To make it easy to copy and paste the code, we have saved this in a file named **firstpipeline.yml** in the desktop folder inside the VM. Double click the file to open it in VS Code.
 
-    ````yaml
-  trigger: 
+    >[!note]: YAML is very strict with indentation. If you are new to YAML, I would recommend that you use tools to format and validate the code. There are several free tools available on the web. 
+
+````yaml
+pool:  
+  vmImage: 'ubuntu-16.04' 
+  
+trigger: 
     - master
 
-    pool:  
-      vmImage: 'ubuntu-16.04' 
+steps:
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)/Templates'
+  inputs:
+    SourceFolder: deployment
+    Contents: '*.json'
+    TargetFolder: '$(build.artifactstagingdirectory)/Templates'
 
-    steps:
-    - task: CopyFiles@2
-        displayName: 'Copy Files to: $(build.artifactstagingdirectory)/Templates'
-        inputs:
-        SourceFolder: deployment
-        Contents: '*.json'
-        TargetFolder: '$(build.artifactstagingdirectory)/Templates'
+- task: Npm@1
+  displayName: 'npm custom'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'install --production'
 
-    - task: Npm@1
-        displayName: 'npm custom'
-        inputs:
-            command: custom
-            verbose: false
-            customCommand: 'install --production'
+- task: ArchiveFiles@2
+  displayName: 'Archive $(Build.SourcesDirectory)'
+  inputs:
+    rootFolderOrFile: '$(Build.SourcesDirectory)'
+    includeRootFolder: false
 
-    - task: ArchiveFiles@2
-        displayName: 'Archive $(Build.SourcesDirectory)'
-        inputs:
-            rootFolderOrFile: '$(Build.SourcesDirectory)'
-            includeRootFolder: false
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+````
 
-    - task: PublishBuildArtifacts@1
-        displayName: 'Publish Artifact: drop'
-
-    ````
-
-5.  Click **Save and run**.
+1.  Click **Save and run**.
 
     ![](./images/image11.png)
 
-6.  Confirm the **Save and run** to commit the YAML definition directly
+1.  Confirm the **Save and run** to commit the YAML definition directly
     to the master branch of the repo.
 
     ![](./images/image12.png)
 
-7.  Follow the build through to completion.
+1.  Follow the build through to completion.
+
+    ![](./images/image-build1.png)
 
 ====================
 
 # Task 3: Adding a build status badge 
 
-1. An important sign for a quality project is its build status badge. When someone finds a project that has a badge indicating that the project is currently in a successful build state, it's a sign that the project is maintained effectively. Return to the **Azure DevOps** tab.
+An important sign for a quality project is its build status badge. When someone finds a project that has a badge indicating that the project is currently in a successful build state, it's a sign that the project is maintained effectively. 
 
 1. Click the build pipeline to navigate to its overview page.
 
+    ![](./images/image-badge6.png)
 
 1. From the **ellipses** dropdown, select **Status badge**.
 
@@ -267,32 +270,39 @@ Now that Azure Pipelines has been installed in the GitHub account, we can config
 
 1. Presss **Ctrl+S** to save the file. 
 
-1.  From the **Source Control** tab, enter a commit message like **Updated build pipeline** and press **Ctrl+Enter** to commit. Confirm if prompted.
+1.  From the **Source Control** tab, enter a commit message like **Added build status badge** and press **Ctrl+Enter** to commit. Confirm if prompted.
 
     ![](./images/image-badge4.png)
 
-  1. If you receive an error promting you to configure user .name and user.email in git, open a command prompt and enter the following command to set your user name and email address:
+1. In Git, only changes need to be staged first to be included in the commit.  If you are prompted to choose whether you want VS Code automatically to stage all changes and commit them directly, choose **Always**
+
+    ![](./images/image-commit1.png)
+
+  1. If you receive an error prompting you to configure user .name and user.email in git, open a command prompt and enter the following command to set your user name and email address:
       
       > ++git config --global user.name "Your Name"++
 
       > ++git config --global user.email "Your Email Address"++
 
-    > [!note] You may be prompted to sign in to github if you have not already signed in
-
-10. Press the **Synchronize Changes** button at the bottom of the window to push the commit to the server. Confirm if prompted.
+1. Press the **Synchronize Changes** button at the bottom of the window to push the commit to the server. Confirm if prompted.
 
     ![](./images/image44.png)
 
+1. You will need to sign in to GitHub, if you have not already signed in
 
-Go to the readme file on the browser and you will see the status. It's that easy :)
+    ![](./images/image-githublogin.png)
+
+
+1. Go to the readme file on the browser and you will see the status. **It's that easy :)**
 
    ![](./images/image-badge5.png)
 
 ==============================
+# Task 4: Embeding automated tests in the CI pipeline
 
-# Task 4 -- Invoking Continuous Delivery from GitHub to Azure
+Now that we have our CI successfully built, it's time to deploy but how do we know if the build is a good candidate for release? Most teams run automated tests, such as unit tests, as a part of their CI process to ensure that they are releasing a high-quality software. Teams capture key code metrics such as code coverage, code anylaysis, as they run the tests, to make sure that the code quality does not drop and the technical debt if not completely eliminated, is kept low. 
 
-Now that we have our CI successfully built, it's time to deploy but how do we know if the build is a good candidate for release? Most teams run automated tests as a part of their CI process.  We're going to pull down the azure-pipelines.yml file that we created earlier and add tasks to run some tests and publish the test results.
+ We're going to pull down the azure-pipelines.yml file that we created earlier and add tasks to run some tests and publish the test results.
 
 1.  Return to Visual Studio Code.
 
@@ -306,7 +316,7 @@ Now that we have our CI successfully built, it's time to deploy but how do we kn
 
     What we are missing is testing in the pipeline. We already have unit tests for our code. We just have to run them in the pipeline. We will add tasks to run the test and publish the results and code coverage. 
 
-1. We will remove all the steps (do not remove the trigger and pool sections) and replace it with the following:
+1. We will remove all the steps and replace it with the following code. You can copy and paste the code from **SecondPipeline.yml** file from the desktop inside the VM.
 
     ````yaml
     pool:  
@@ -368,15 +378,7 @@ Now that we have our CI successfully built, it's time to deploy but how do we kn
     ![](./images/image44.png)
 
 
-    Back in Azure DevOps, we can see that our build pipeline has kicked off a new build. We can follow as it executes the tasks we defined earlier, and even get a real-time view into what's going on at each step. When the build completes, we can review the logs and any tests that were performed as part of the process.
-
-1. Return to Azure DevOps and navigate to the **Builds** hub.
-
-    ![](./images/image45.png)
-
-1. Click the new build.
-
-    ![](./images/image46.png)
+1. Back in Azure DevOps, we can see that our build pipeline has kicked off a new build. We can follow as it executes the tasks we defined earlier, and even get a real-time view into what's going on at each step. When the build completes, we can review the logs and any tests that were performed as part of the process.
 
 1. Track the build tasks.
 
@@ -396,15 +398,16 @@ Now that we have our CI successfully built, it's time to deploy but how do we kn
 
 1. Finally, you can use the details pane to view additional information, for the selected test case, that can help troubleshooting such as the error message, stack trace, attachments, work items, historical trend, and more.
 
-1. From the results, we can see all 40 tests have passed  which means we have not broken any changes and this build is a good candidate for deployment. 
+From the results, we can see all 40 tests have passed  which means we have not broken any changes and this build is a good candidate for deployment. 
 
 =============================
+## Task 5: Configuring a CD pipeline with Azure Pipelines
 
-## Task 6 -- Configuring an Azure Continuous Delivery Pipeline
+ Now that the build pipeline is complete and all tests have passed, we can turn our attention to creating a release pipeline. 
+ 
+ Like the build templates, there are many packaged options available that cover common deployment scenarios, such as publishing to Azure. But to illustrate how flexible and productive the experience is, we will build this pipeline from an empty template.
 
- Now that the build pipeline is complete and all tests have passed, we can turn our attention to creating a release pipeline. Like the build templates, there are many packaged options available that cover common deployment scenarios, such as publishing to Azure. But to illustrate how flexible and productive the experience is, we will build this pipeline from an empty template.
-
-1.  Click **Release**.
+1.  From the build summary page, click **Release** to create a new CD pipeline to deploy the artifacts produced by the build.
 
     ![](./images/image13.png)
 
@@ -436,7 +439,7 @@ Now that we have our CI successfully built, it's time to deploy but how do we kn
 
     ![](./images/image18.png)
 
-    We also have the option of adding quality gates to the release process. For example, we could require that a specific user or group approve a release before it continues, or that they approve it after it's been deployed. These gates provide notifications to the necessary groups, as well as polling support if you're automating the gates using something dynamic, such as an Azure function, REST API, work item query, and more. We won't add any of that here, but we could easily come back and do it later on.
+    >We also have the option of adding quality gates to the release process. For example, we could require that a specific user or group approve a release before it continues, or that they approve it after it's been deployed. These gates provide notifications to the necessary groups, as well as polling support if you're automating the gates using something dynamic, such as an Azure function, REST API, work item query, and more. We won't add any of that here, but we could easily come back and do it later on.
 
 1.  Click the **pre-deployment conditions** button.
 
@@ -446,8 +449,7 @@ Now that we have our CI successfully built, it's time to deploy but how do we kn
 
     ![](./images/image20.png)
 
-    In this pipeline, we're going to need to specify the same resource group in multiple tasks, so it's a good practice
-    to use a pipeline variable. We'll add one here for the new Azure resource group we want to provision our resources to. Note that
+    In this pipeline, we're going to need to specify the same resource group in multiple tasks, so it's a good practice  to use a pipeline variable. We'll add one here for the new Azure resource group we want to provision our resources to. Note that
     there are also a variety of deployment options we can configure, as well as a retention policy.
 
 1.  Select the **Variables** tab.
@@ -460,9 +462,7 @@ Now that we have our CI successfully built, it's time to deploy but how do we kn
 
     ![](./images/image22.png)
 
-    Also, just like the build pipeline, the release pipeline is really just a set of tasks. There are many
-    out-of-the-box tasks available, and you can build your own if needed. The first task our release requires is to set up the Azure
-    deployment environment if it doesn't yet exist. After we add the task, I can authorize access to the Azure account I want to deploy
+    Also, just like the build pipeline, the release pipeline is really just a set of tasks. There are many out-of-the-box tasks available, and you can build your own if needed. The first task our release requires is to set up the Azure deployment environment if it doesn't yet exist. After we add the task, I can authorize access to the Azure account I want to deploy
     to and instruct it to use the variable name we just specified for the resource group name.
 
 1. Select the **Tasks** tab.
@@ -482,7 +482,7 @@ Now that we have our CI successfully built, it's time to deploy but how do we kn
 
     ![](./images/image26.png)
 
-1. Select and authorize an Azure subscription.
+1. Select and authorize an Azure subscription. Note you will need to disable popup-blockers to sign in to Azure for authorization. If the pop-up window hangs, please close and try it again. 
 
     ![](./images/image27.png)
 
@@ -502,6 +502,8 @@ Now that we have our CI successfully built, it's time to deploy but how do we kn
 
 1. Enter the settings below. You can use the browse navigation to
     select them from the most recent build output.
+
+    ![](./images/image-release3.png)
 
     Template:
     **\$(System.DefaultWorkingDirectory)/\_ContosoAir-CI/drop/Templates/azuredeploy.json**
@@ -570,7 +572,7 @@ Now that we have our CI successfully built, it's time to deploy but how do we kn
     name of the app service we want to deploy to. By this time in the
     pipeline, it will have been filled in for us by the ARM Outputs
     task. Also note that we have the option to specify a slot to deploy
-    to, but we'll talk about deployment slots later on.
+    to, but that is not covered in this demo. 
 
 1. Click the **Add task** button.
 
@@ -597,7 +599,7 @@ Now that we have our CI successfully built, it's time to deploy but how do we kn
 
     ![](./images/image40.png)
 
-1. Select **Release** and then select **Create a Release** 
+1. Select **+ Release** and then select **Create a Release** 
 
     ![](./images/image-release1.png)
 
