@@ -101,11 +101,11 @@ Once the repo is forked, clone the GitHub repo locally and open it in Visual Stu
 
 We will be publishing a node-based web app that has a Cosmos DB (Mongo DB)  backend. You will need an Azure subscription. If you do not want to deploy to your subscription, you can use the Azure Pass provided for this technical workshop. See the **resources** tab for your Azure pass code. You will need to go to [https://www.microsoftazurepass.com](https://www.microsoftazurepass.com/) and redeem that code against any MSA. Then you would use the MSA to log into the Azure Portal. 
 
-- [] Open a new tab and navigate to [https://dev.azure.com](https://dev.azure.com)  to create a new Azure DevOps org/account. 
+- [] Open a new tab and navigate to [https://dev.azure.com](https://dev.azure.com)  to create a new Azure DevOps org/account. Select **Start for free**. Enter the same credentials you entered to login to Azure 
 
-- [] Select **Start for free**. Enter the same credentials you entered to login to Azure.
+**OR**
 
-- [] Create a new Azure DevOps project, preferably named something like **"ContosoAir"*
+ - [] You can use the [Azure DevOps Demo Generator](https://azuredevopsdemogenerator-staging.azurewebsites.net/?name=ContosoAir-V1) to spin up a new project  
 
 ============
 # Demo Scenario
@@ -625,18 +625,18 @@ From the results, we can see all 40 tests have passed  which means we have not b
 
 # Exercise 2 -- Managing GitHub Projects with Azure DevOps
 
-DevOps is not just about automation; while continuous integartion and continuous delivery are key practices, teams also need continuous planning. As the saying software developmement is a team sport - it is vital that everyone stays on the same page. While GitHub issues help teams 
+DevOps is not just about automation; while continuous integartion and continuous delivery are key practices, teams also need continuous planning. As the saying software developmement is a team sport - it is vital that everyone stays on the same page. While GitHub issues help teams manage work artifacts such as issues and bugs which might be sufficient for inidviduals and small teams, but they do not scale well to support the needs of enterprise teams.  
+
 Azure Boards provides a wealth of project management functionality that spans Kanban boards, backlogs, team dashboards, and
 custom reporting. By connecting Azure Boards with GitHub repositories, teams can take advantage of the rich project management capabilities. You can create links between GitHub commits and pull requests to work items tracked in Azure Boards. This enables a seamless way for you to use GitHub for software development while using Azure Boards to plan and track your work.
 
-
 ====================
 
-## Task 1 : Integrating Azure Boards
+# Task 1: Connecting GitHub with Azure Boards 
 
 1.  Return to the Azure DevOps tab.
 
-2.  Navigate to **Boards \| Backlogs**.
+1.  Navigate to **Boards \| Backlogs**.
 
     ![](./images/image76.png)
 
@@ -645,7 +645,7 @@ custom reporting. By connecting Azure Boards with GitHub repositories, teams can
     story at a higher level and add tasks to define how the story is to be implemented, but for our demo purposes here we'll leave it as
     a single work item.
 
-3.  Click **New Work Item** and add a user story with the title **"User
+1.  Click **New Work Item** and add a user story with the title **"User
     can select airport by city"**. Press **Enter** to create.
 
     ![](./images/image77.png)
@@ -654,15 +654,15 @@ custom reporting. By connecting Azure Boards with GitHub repositories, teams can
     board, we can edit items on a card in line, or even drag cards  around to change their state and assignment. Let's take ownership of
     the new user story so we can begin work.
 
-4.  Click **View as board**.
+1.  Click **View as board**.
 
     ![](./images/image78.png)
 
-5.  Drag the newly created user story to the **Active** column.
+1.  Drag the newly created user story to the **Active** column.
 
     ![](./images/image79.png)
 
-6.  Dropping the user story onto the **Active** column assigns it to you
+1.  Dropping the user story onto the **Active** column assigns it to you
     and sets its **State** to **Active**. Make note of the task ID for
     reference later during a future commit and pull request.
 
@@ -670,19 +670,19 @@ custom reporting. By connecting Azure Boards with GitHub repositories, teams can
 
     In order to complete our integration, we'll need to wire up a connection between this project and the GitHub repo.
 
-7.  Click **Project settings**.
+1.  Click **Project settings**.
 
     ![](./images/image81.png)
 
-8.  Under **Boards**, select **GitHub connections**.
+1.  Under **Boards**, select **GitHub connections**.
 
     ![](./images/image82.png)
 
-9.  Click **Connect your GitHub account**.
+1.  Click **Connect your GitHub account**.
 
     ![](./images/image83.png)
 
-10. Select the project repo and click **Save**.
+1. Select the project repo and click **Save**.
 
     ![](./images/image84.png)
 
@@ -691,31 +691,31 @@ custom reporting. By connecting Azure Boards with GitHub repositories, teams can
     airports appear to be sorted by airport code, which isn't the
     behavior we want our users to see.
 
-11. Return to the web app tab and click **Login**.
+1. Return to the web app tab and click **Login**.
 
     ![](./images/image85.png)
    
    
 
-12. Log in with any email and password.
+1. Log in with any email and password.
 
     ![](./images/image86.png)
    
 
-13. Click **Book**.
+1. Click **Book**.
 
     ![](./images/image87.png)
    
 
-14. Expand the airport dropdown to note that it's not sorted
+1. Expand the airport dropdown to note that it's not sorted
     alphabetically by city.
 
     ![](./images/image88.png)
    
 ==============
 
-Task 8 -- Committing to Complete a Task
----------------------------------------
+# Task 2: Committing to Complete a Task
+
 
 1.  Return to **Visual Studio Code**.
 
@@ -741,19 +741,21 @@ Task 8 -- Committing to Complete a Task
    
 
 5.  From the **Explorer** tab, open
-    **src/services/book.form.service.js**.
+    **src/services/airports.service.js**.
 
     ![](./images/image92.png)
    
 
-6.  Locate the **getForm** function and replace the existing
-    **airports** initializer with the code below. This will sort the
+6.  Locate the **getAll** function and replace the existing code
+    with the code below. This will sort the
     airports by city.
 
-    ````
-    airports: this.\_airports.getAll().sort(function(first, second) {
+    ````JavaScript
 
-    return first.city.localeCompare(second.city);})
+        var tempAirport = this._airports.filter(a => a.code).map(avoidEmptyCity);
+        tempAirport = tempAirport.sort(function(first, second) {
+                return first.city.localeCompare(second.city);})
+        return tempAirport;
 
     ````
 
@@ -762,10 +764,7 @@ Task 8 -- Committing to Complete a Task
 
 7.  Press **Ctrl+S** to save the file.
 
-    We'll skip testing this locally for the sake of
-    the demo. Instead, we'll commit it using a comment that includes
-    special syntax to link it to the Azure Boards task we saw earlier.
-    Now this commit will become trackable from project management, as
+    We'll commit it using a comment that includes special syntax to link it to the Azure Boards task we saw earlier. Now this commit will become trackable from project management, as
     long as we include the phrase "Fixes AB\#ID".
 
 8.  Switch to the **Source Control** tab and enter a commit message of
