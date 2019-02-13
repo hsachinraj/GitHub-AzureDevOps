@@ -634,19 +634,42 @@ custom reporting. By connecting Azure Boards with GitHub repositories, teams can
 
 # Task 1: Connecting GitHub with Azure Boards 
 
+
+1. Return to the web app tab and click **Login**.
+
+    ![](./images/image85.png)
+   
+   
+
+1. Log in with any email and password.
+
+    ![](./images/image86.png)
+   
+
+1. Click **Book**.
+
+    ![](./images/image87.png)
+   
+
+1. Expand the airport dropdown to note that it's not sorted
+    alphabetically by city.
+
+    ![](./images/image88.png)
+
+     In our scenario, users will need to be able to book flights by selecting the cities involved. We will create a new
+    user story to sort the airports listed in the booking form in alphabetical order by city. Ordinarily we would create the user
+    story at a higher level and add tasks to define how the story is to be implemented, but for our demo purposes here we'll leave it as
+    a single work item.
+
 1.  Return to the Azure DevOps tab.
 
 1.  Navigate to **Boards \| Backlogs**.
 
     ![](./images/image76.png)
 
-    In our scenario, users will need to be able to book flights by selecting the cities involved. We will create a new
-    user story to sort the airports listed in the booking form in alphabetical order by city. Ordinarily we would create the user
-    story at a higher level and add tasks to define how the story is to be implemented, but for our demo purposes here we'll leave it as
-    a single work item.
 
-1.  Click **New Work Item** and add a user story with the title **"User
-    can select airport by city"**. Press **Enter** to create.
+
+1.  Click **New Work Item** and add a user story with the title **As a customer, I want to see airports sorted by city**. Press **Enter** to create.
 
     ![](./images/image77.png)
 
@@ -670,6 +693,10 @@ custom reporting. By connecting Azure Boards with GitHub repositories, teams can
 
     In order to complete our integration, we'll need to wire up a connection between this project and the GitHub repo.
 
+=============
+
+# Task 2: Connecting GitHub Repo to Azure Boards
+
 1.  Click **Project settings**.
 
     ![](./images/image81.png)
@@ -691,30 +718,10 @@ custom reporting. By connecting Azure Boards with GitHub repositories, teams can
     airports appear to be sorted by airport code, which isn't the
     behavior we want our users to see.
 
-1. Return to the web app tab and click **Login**.
-
-    ![](./images/image85.png)
-   
-   
-
-1. Log in with any email and password.
-
-    ![](./images/image86.png)
-   
-
-1. Click **Book**.
-
-    ![](./images/image87.png)
-   
-
-1. Expand the airport dropdown to note that it's not sorted
-    alphabetically by city.
-
-    ![](./images/image88.png)
    
 ==============
 
-# Task 2: Committing to Complete a Task
+# Task 3: Committing to Complete a Task
 
 
 1.  Return to **Visual Studio Code**.
@@ -752,10 +759,9 @@ custom reporting. By connecting Azure Boards with GitHub repositories, teams can
 
     ````JavaScript
 
-        var tempAirport = this._airports.filter(a => a.code).map(avoidEmptyCity);
-        tempAirport = tempAirport.sort(function(first, second) {
-                return first.city.localeCompare(second.city);})
-        return tempAirport;
+        getAll(){
+                return this._airports.filter(a => a.code).map(avoidEmptyCity).sort((a, b) => (a.city > b.city) ? 1 : -1);
+            }
 
     ````
 
@@ -843,16 +849,15 @@ custom reporting. By connecting Azure Boards with GitHub repositories, teams can
     Once the deployment works its way through build
     and release, we can confirm the new functionality.
 
-20. Follow the CI/CD pipeline through to completion.
+1. Follow the CI/CD pipeline through to completion.
 
-21. Refresh the web app site. Return to the booking page (you'll need to
+1. Refresh the web app site. Return to the booking page (you'll need to
     log in again) and confirm the airports are sorted by city now
     (scroll down past the airports with no city name).
 
     ![](./images/image104.png)
    
-
-22. Return to the Azure DevOps tab open to the Kanban board.
+1. Return to the Azure DevOps tab open to the Kanban board.
 
     Since the user story we were working on was
     linked in a pull request that was approved, Azure DevOps will
@@ -860,17 +865,16 @@ custom reporting. By connecting Azure Boards with GitHub repositories, teams can
     can also see that the related GitHub commits and pull request were
     linked to the work item.
 
-23. The user story should have already moved to the **Closed** state and
+1. The user story should have already moved to the **Closed** state and
     column. Click to open it.
 
     ![](./images/image105.png)
    
 
-24. The commit and pull request should now be visible under
+1. The commit and pull request should now be visible under
     **Development**.
 
     ![](./images/image106.png)
-   
 
 Summary
 =======
