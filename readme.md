@@ -99,7 +99,7 @@ Once the repo is forked, clone the GitHub repo locally and open it in Visual Stu
 
 **Azure Subscription**
 
-We will be publishing a node-based web app that has a Cosmos DB (Mongo DB)  backend. You will need an Azure subscription. If you do not want to deploy to your subscription, you can use the Azure Pass provided for this technical workshop. See the **resources** tab for your Azure pass code. You will need to go to [https://www.microsoftazurepass.com](https://www.microsoftazurepass.com/) and redeem that code against any MSA. Then you would use the MSA to log into the Azure Portal. 
+    >[!note] We will be publishing a node-based web app that has a Cosmos DB (Mongo DB)  backend. You will need an Azure subscription. If you do not want to deploy to your subscription, you can use the Azure Pass provided for this technical workshop. See the **resources** tab for your Azure pass code. You will need to go to [https://www.microsoftazurepass.com](https://www.microsoftazurepass.com/) and redeem that code against any MSA. Then you would use the MSA to log into the Azure Portal. 
 
 - [] Open a new tab and navigate to [https://dev.azure.com](https://dev.azure.com)  to create a new Azure DevOps org/account. Select **Start for free**. Enter the same credentials you entered to login to Azure 
 
@@ -195,9 +195,9 @@ Now that Azure Pipelines has been installed and configured, we can start buildin
 
 1.  Replace the default template with the YAML below. To make it easy to copy and paste the code, we have saved this in a file named **firstpipeline.yml** in the desktop folder inside the VM. Double click the file to open it in VS Code.
 
-    >[!note]: YAML is very strict with indentation. If you are new to YAML, I would recommend that you use tools to format and validate the code. There are several free tools available on the web. 
+    >[!note] YAML is very strict with indentation. If you are new to YAML, I would recommend that you use tools to format and validate the code. There are several free tools available on the web. 
 
-````yaml
+````yaml-nocopy
 pool:  
   vmImage: 'ubuntu-16.04' 
   
@@ -318,7 +318,7 @@ Now that we have our CI successfully built, it's time to deploy but how do we kn
 
 1. We will remove all the steps and replace it with the following code. You can copy and paste the code from **SecondPipeline.yml** file from the desktop inside the VM.
 
-    ````yaml
+    ````yaml-nocopy
     pool:  
     vmImage: 'ubuntu-16.04' 
     
@@ -757,7 +757,7 @@ custom reporting. By connecting Azure Boards with GitHub repositories, teams can
     with the code below. This will sort the
     airports by city.
 
-    ````JavaScript
+    ````JavaScript-nocopy
 
         getAll(){
                 return this._airports.filter(a => a.code).map(avoidEmptyCity).sort((a, b) => (a.city > b.city) ? 1 : -1);
