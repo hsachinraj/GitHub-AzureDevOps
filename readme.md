@@ -1,6 +1,6 @@
 # Overview
 
-GitHub hosts over 25 million repositories containing applications of all
+GitHub hosts over 100 million repositories containing applications of all
 shapes and sizes. But GitHub is just a start---those applications still
 need to get built, released, and managed to reach their full potential.
 
