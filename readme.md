@@ -47,7 +47,6 @@ The key takeaways of the demo are:
     creating business value.
 
 
-=============
 
 ## Prerequisites:
 
@@ -62,17 +61,17 @@ These items are required for this demo.
 > **Note:** If you are using your own machine, you will also need  the following:
 
 4.  ARM Outputs extension installed in your Azure DevOps account from
-    <https://marketplace.visualstudio.com/items?itemName=keesschollaart.arm-outputs>.
+    <https://marketplace.visualstudio.com/items?itemNamekeesschollaart.arm-outputs>.
 
 5.  Git installed from <https://git-scm.com/downloads>.
 
 6.  Visual Studio Code installed from <https://code.visualstudio.com>.
 
 7.  Azure Pipelines extension for Visual Studio Code installed from
-    <https://marketplace.visualstudio.com/items?itemName=ms-azure-devops.azure-pipelines>.
+    <https://marketplace.visualstudio.com/items?itemNamems-azure-devops.azure-pipelines>.
 
 8.  GitHub Pull Requests extension for Visual Studio Code installed from
-    <https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github>.
+    <https://marketplace.visualstudio.com/items?itemNameGitHub.vscode-pull-request-github>.
 
 
 ## Demo Setup
@@ -105,9 +104,9 @@ Once the repo is forked, clone the GitHub repo locally and open it in Visual Stu
 
 **OR**
 
- - [] You can use the [Azure DevOps Demo Generator](https://azuredevopsdemogenerator-staging.azurewebsites.net/?name=ContosoAir-V1) to spin up a new project  
+ - [] You can use the [Azure DevOps Demo Generator](https://azuredevopsdemogenerator-staging.azurewebsites.net/?nameContosoAir-V1) to spin up a new project  
 
-============
+
 # Demo Scenario
 
 In this demo, we'll be illustrating the integration and automation benefits of Azure DevOps. We will take on the role of helping a
@@ -127,7 +126,7 @@ This will involve setting up a pipeline so that commits to the GitHub
 repo invoke a continuous integration build in Azure DevOps. Once that build is complete, it will invoke a continuous delivery deployment to push the bits out to Azure, creating the required resources, if necessary. The first thing we need to do is to connect GitHub with Azure DevOps, which we can do via the Azure Pipelines
 extension in the GitHub Marketplace.
 
-============
+
 # Task 1: Installing Azure Pipelines from GitHub Marketplace
 
 Azure Pipelines is available in GitHub Marketplace which makes it even more easy for teams to configure a CI/CD pipeline for any Azure application using your preferred language and framework as part of your GitHub workflow in just a few simple steps
@@ -174,7 +173,7 @@ Azure Pipelines is available in GitHub Marketplace which makes it even more easy
 
     ![](./images/image7.png)
 
-===============
+
 # Task 2: Configuring an Continuous Integration Pipeline
 
 Now that Azure Pipelines has been installed and configured, we can start building the pipelines but we will need to select a project where the pipeline will be saved. You may select an existing or create a new Azure DevOps project  to hold and run the pipelines we need for continuous integration and continuous delivery. The first thing we'll do is to create a CI pipeline.
@@ -242,7 +241,7 @@ steps:
 
     ![](./images/image-build1.png)
 
-====================
+
 
 # Task 3: Adding a build status badge 
 
@@ -297,7 +296,7 @@ An important sign for a quality project is its build status badge. When someone 
 
    ![](./images/image-badge5.png)
 
-==============================
+
 # Task 4: Embeding automated tests in the CI pipeline
 
 Now that we have our CI successfully built, it's time to deploy but how do we know if the build is a good candidate for release? Most teams run automated tests, such as unit tests, as a part of their CI process to ensure that they are releasing a high-quality software. Teams capture key code metrics such as code coverage, code anylaysis, as they run the tests, to make sure that the code quality does not drop and the technical debt if not completely eliminated, is kept low. 
@@ -400,7 +399,7 @@ Now that we have our CI successfully built, it's time to deploy but how do we kn
 
 From the results, we can see all 40 tests have passed  which means we have not broken any changes and this build is a good candidate for deployment. 
 
-=============================
+
 ## Task 5: Configuring a CD pipeline with Azure Pipelines
 
  Now that the build pipeline is complete and all tests have passed, we can turn our attention to creating a release pipeline. 
@@ -621,7 +620,7 @@ From the results, we can see all 40 tests have passed  which means we have not b
 
     ![](./images/image-contoso.png)
     
-=============
+
 
 # Exercise 2 -- Managing GitHub Projects with Azure DevOps
 
@@ -630,7 +629,7 @@ DevOps is not just about automation; while continuous integartion and continuous
 Azure Boards provides a wealth of project management functionality that spans Kanban boards, backlogs, team dashboards, and
 custom reporting. By connecting Azure Boards with GitHub repositories, teams can take advantage of the rich project management capabilities. You can create links between GitHub commits and pull requests to work items tracked in Azure Boards. This enables a seamless way for you to use GitHub for software development while using Azure Boards to plan and track your work.
 
-====================
+
 
 # Task 1: Connecting GitHub with Azure Boards 
 
@@ -693,7 +692,7 @@ custom reporting. By connecting Azure Boards with GitHub repositories, teams can
 
     In order to complete our integration, we'll need to wire up a connection between this project and the GitHub repo.
 
-=============
+
 
 # Task 2: Connecting GitHub Repo to Azure Boards
 
@@ -719,7 +718,7 @@ custom reporting. By connecting Azure Boards with GitHub repositories, teams can
     behavior we want our users to see.
 
    
-==============
+
 
 # Task 3: Committing to Complete a Task
 
@@ -760,7 +759,7 @@ custom reporting. By connecting Azure Boards with GitHub repositories, teams can
     ````JavaScript-nocopy
 
         getAll(){
-                return this._airports.filter(a => a.code).map(avoidEmptyCity).sort((a, b) => (a.city > b.city) ? 1 : -1);
+                return this._airports.filter(a > a.code).map(avoidEmptyCity).sort((a, b) > (a.city > b.city) ? 1 : -1);
             }
 
     ````
@@ -877,7 +876,7 @@ custom reporting. By connecting Azure Boards with GitHub repositories, teams can
     ![](./images/image106.png)
 
 Summary
-=======
+
 
 Many organizations have their projects hosted in GitHub, and we just
 showed how you can set up automated deployment to Azure in minutes. And
